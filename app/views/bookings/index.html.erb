@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Trip</h1>
+  <h3>Upcoming Trips</h3>
+  <div class="row">
+    <% @bookings.each do |booking| %>
+      <div class="col-md-4">
+        <div class="list-card">
+          <%= link_to booking_path(booking) do %>
+            <div class="list-card-image">
+              <%= image_tag("logo.png") %>
+            </div>
+            <%= booking.listing.country %>
+          <% end %>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+
+</div>
