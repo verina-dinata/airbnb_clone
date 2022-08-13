@@ -6,10 +6,13 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-puts "Cleaning Users' DB"
-User.destroy_all
+puts "Cleaning Database"
 
-puts "Creating 5 Faker users (userX@gmail.com) (PW:Abc123!!)"
+User.destroy_all
+Listing.destroy_all
+Booking.destroy_all
+
+puts "Creating 10 Faker users (userX@gmail.com) (PW:Abc123!!)"
 10.times do |i|
   user = User.create!(
     first_name: Faker::Name.first_name,
@@ -19,13 +22,9 @@ puts "Creating 5 Faker users (userX@gmail.com) (PW:Abc123!!)"
     phone_number: Faker::PhoneNumber.cell_phone
   )
 end
+puts "Done"
 
-puts "Created users user01@gmail.com to user10@gmail.com"
-
-puts "Cleaning Database"
-Listing.destroy_all
-
-puts "Creating listings"
+puts "Creating Listings"
 
 5.times do
   title = Faker::Address.community
@@ -41,4 +40,18 @@ puts "Creating listings"
   listing = Listing.new(title: title, description: description, country: country, address: address, price_per_night: price_per_night, bedroom_count: bedroom_count, bathroom_count: bathroom_count, bed_count: bed_count, guest_count: guest_count, house_rules: house_rules)
   listing.host = User.all.sample
   listing.save!
+end
+
+puts "Creating Bookings"
+
+5.times do
+  start_date = Faker::Date.between(from: '2021-01-23', to: '2023-09-25')
+  end_date = start_date + rand(1..14)
+  additional_requests = Faker::Lorem.paragraph(sentence_count: 2)
+  accepted_by_host = end_date < Date.today
+  guest_count = rand(1..8)
+  booking = Booking.new(start_date: start_date, end_date: end_date, additional_requests: additional_requests, accepted_by_host: accepted_by_host, guest_count: guest_count)
+  booking.guest = User.all.sample
+  booking.listing = Listing.all.sample
+  booking.payment_amount = (end_date - start_date).to_i * booking.listing.price_per_night
 end

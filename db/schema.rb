@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_13_094552) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_13_124613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_094552) do
     t.date "start_date"
     t.date "end_date"
     t.text "additional_requests"
-    t.boolean "accepted_by_host"
+    t.boolean "accepted_by_host", default: false
     t.integer "guest_count"
     t.float "payment_amount"
     t.datetime "created_at", null: false
