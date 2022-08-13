@@ -46,15 +46,14 @@ end
 puts "Creating Bookings"
 
 5.times do
-  start_date = Faker::Date.between(from: '2021-01-23', to: '2023-09-25')
-  end_date = start_date + rand(1..14)
+  start_date = Faker::Date.between(from: Date.today - 6.month, to: Date.today + 6.month)
+  end_date = start_date + rand(1..5)
   additional_requests = Faker::Lorem.paragraph(sentence_count: 2)
-  accepted_by_host = end_date < Date.today
-  guest_count = rand(1..5)
-  booking = Booking.new(start_date: start_date, end_date: end_date, additional_requests: additional_requests, accepted_by_host: accepted_by_host, guest_count: guest_count)
+  guest_count = rand(1..8)
+  booking = Booking.new(start_date: start_date, end_date: end_date, additional_requests: additional_requests, guest_count: guest_count)
+  booking.status = :accepted_by_host if end_date < Date.today
   booking.guest = User.all.sample
   booking.listing = Listing.all.sample
   booking.payment_amount = (end_date - start_date).to_i * booking.listing.price_per_night
-  puts booking.payment_amount
   booking.save!
 end
