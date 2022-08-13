@@ -30,14 +30,14 @@ puts "Cleaning Users' DB"
 User.destroy_all
 
 puts "Creating 5 Faker users (user0X@gmail.com) (PW:Abc123!!)"
-5.times do |i|
+10.times do |i|
   user =  User.create!(
     first_name: Faker::Name.first_name
     last_name: Faker::Name.last_name
-    email: "user0#{i}@gmail.com"
+    email: "user#{i}@gmail.com"
     password: "Abc123!!"
     phone_number: Faker::PhoneNumber
   )
   end
 
-puts "Created users user01@gmail.com to user05@gmail.com"
+puts "Created users user01@gmail.com to user10@gmail.com"
