@@ -8,9 +8,11 @@
 
 puts "Cleaning Database"
 
-User.destroy_all
-Listing.destroy_all
 Booking.destroy_all
+Listing.destroy_all
+User.destroy_all
+
+
 
 puts "Creating 10 Faker users (userX@gmail.com) (PW:Abc123!!)"
 10.times do |i|
@@ -22,7 +24,6 @@ puts "Creating 10 Faker users (userX@gmail.com) (PW:Abc123!!)"
     phone_number: Faker::PhoneNumber.cell_phone
   )
 end
-puts "Done"
 
 puts "Creating Listings"
 
@@ -49,9 +50,11 @@ puts "Creating Bookings"
   end_date = start_date + rand(1..14)
   additional_requests = Faker::Lorem.paragraph(sentence_count: 2)
   accepted_by_host = end_date < Date.today
-  guest_count = rand(1..8)
+  guest_count = rand(1..5)
   booking = Booking.new(start_date: start_date, end_date: end_date, additional_requests: additional_requests, accepted_by_host: accepted_by_host, guest_count: guest_count)
   booking.guest = User.all.sample
   booking.listing = Listing.all.sample
   booking.payment_amount = (end_date - start_date).to_i * booking.listing.price_per_night
+  puts booking.payment_amount
+  booking.save!
 end
