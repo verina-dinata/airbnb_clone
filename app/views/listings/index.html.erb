@@ -1,0 +1,7 @@
+<div class="container">
+  <% @listings.each do |listing| %>
+  <%= listing.title %>
+  <%= listing.country %>
+  <p>$<%= listing.price_per_night%> SGD night </p>
+  <% end %>
+</div>
