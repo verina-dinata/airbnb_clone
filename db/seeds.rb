@@ -16,7 +16,7 @@ puts "Creating 5 Faker users (userX@gmail.com) (PW:Abc123!!)"
     last_name: Faker::Name.last_name,
     email: "user#{i}@gmail.com",
     password: "Abc123!!",
-    phone_number: Faker::PhoneNumber
+    phone_number: Faker::PhoneNumber.cell_phone
   )
 end
 
