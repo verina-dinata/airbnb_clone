@@ -1,4 +1,5 @@
 class Listing < ApplicationRecord
+  belongs_to :host, class_name: "User"
   validates :title, presence: true, length: { minimum: 6 }
   validates :description, :country, presence: true
   validates :address, presence: true, uniqueness: true
