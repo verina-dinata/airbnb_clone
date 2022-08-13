@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
 puts "Cleaning Database"
 Listing.destroy_all
 
@@ -24,3 +25,14 @@ puts "Creating listings"
   listing = Listing.create!(title: title, description: description, country: country, address: address, price_per_night: price_per_night, bedroom_count: bedroom_count, bathroom_count: bathroom_count, bed_count: bed_count, guest_count: guest_count, house_rules: house_rules)
 
 end
+
+puts "Creating 5 Faker users (testX@gmail.com) (PW:Abc123!!")
+5.times do |i|
+  user =  User.create!(
+    first_name: Faker::Name.first_name
+    last_name: Faker::Name.last_name
+    email: "test#{i}@gmail.com"
+    password: "Abc123!!"
+    phone_number: Faker::PhoneNumber
+  )
+puts "Created users test1@gmail.com to test5@gmail.com"
