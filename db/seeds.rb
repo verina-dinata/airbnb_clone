@@ -39,6 +39,6 @@ puts "Creating listings"
   bed_count = rand(1..5)
   house_rules = Faker::Lorem.paragraph(sentence_count: 2)
   listing = Listing.new(title: title, description: description, country: country, address: address, price_per_night: price_per_night, bedroom_count: bedroom_count, bathroom_count: bathroom_count, bed_count: bed_count, guest_count: guest_count, house_rules: house_rules)
-  listing.host_id = User.all.sample
-  listing.save
+  listing.host = User.all.sample
+  listing.save!
 end
