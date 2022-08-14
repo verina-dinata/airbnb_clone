@@ -23,7 +23,8 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @booking = Booking.new(booking_params)
+    @booking = Booking.new() #to change
+    #http://localhost:3000/bookings/new?start_date=2022-10-10&end_date=2022-11-11&guest_count=5
     authorize @booking
   end
 
@@ -81,5 +82,15 @@ class BookingsController < ApplicationController
 
   def find_year(date)
     date.strftime('%Y').to_s
+  end
+
+  def calculate_total_nights_amount
+    @booking.listing.price_per_night * @booking.night_count
+  end
+
+  def total_amount
+    service_fee = @booking.listing.service_fee
+    cleaning_fee = @booking.listing.cleaning_fee
+    calculate_total_nights_amount + service_fee + cleaning_fee
   end
 end
