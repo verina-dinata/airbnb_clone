@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show]
 
   def index
-    @bookings = Booking.all
+    @bookings = policy_scope(Booking)
     @past_bookings = @bookings.select { |booking| booking.end_date < Date.today }
     @upcoming_bookings = @bookings.select { |booking| booking.end_date > Date.today }
   end
@@ -37,8 +37,16 @@ class BookingsController < ApplicationController
     else
       render :new
     end
-
   end
+  def edit
+    authorize @restaurant # Add this line
+    # [...]
+  end
+  def update
+    authorize @restaurant # Add this line
+    # [...]
+  end
+
 
   private
 
