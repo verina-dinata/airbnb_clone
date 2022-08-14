@@ -1,0 +1,22 @@
+<div class="row">
+
+  <% bookings.each do |booking| %>
+    <%# #change to make it responsive %>
+    <div class="col-md-4">
+      <%= link_to booking_path(booking), class: "link" do %>
+        <div class="trip-card flex">
+          <div class="trip-card-image">
+            <%= image_tag("logo.png", width: "72px") %>
+          </div>
+          <div class="trip-card-info">
+            <p class="card-info-bold"><%= booking.listing.country %></p>
+            <div class="card-info-light">
+              <p>Host by <%= booking.listing.host.first_name %></p>
+              <p><%= booking.start_date %> - <%= booking.end_date %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

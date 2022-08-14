@@ -1,55 +1,36 @@
 <div class="container">
-  <h1>Trip</h1>
-  <div class="trip-margin">
-    <h3>Upcoming Trips</h3>
+  <div class="row">
+    <h1>Trip</h1>
+    <div class="trip-margin">
+      <h3>Upcoming Trips</h3>
+      <%= render "card", bookings: @upcoming_bookings %>
 
-    <div class="row">
-
-      <% @upcoming_bookings.each do |booking| %>
-        <%# #change to make it responsive %>
-        <div class="col-md-4">
-          <%= link_to booking_path(booking), class: "link" do %>
-            <div class="trip-card flex">
-              <div class="trip-card-image">
-                <%= image_tag("logo.png", width: "72px") %>
-              </div>
-              <div class="trip-card-info">
-                <p class="card-info-bold"><%= booking.listing.country %></p>
-                <div class="card-info-light">
-                  <p>Host by <%= booking.listing.host.first_name %></p>
-                  <p><%= booking.start_date %> - <%= booking.end_date %></p>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
     </div>
-  </div>
 
-  <div class="trip-margin">
-    <h3>Where you've been</h3>
-    <div class="row">
+    <div class="trip-margin">
+      <h3>Where you've been</h3>
+      <div class="row">
 
-      <% @past_bookings.each do |booking| %>
-        <%# #change to make it responsive %>
-        <div class="col-md-4">
-          <%= link_to booking_path(booking), class: "link" do %>
-            <div class="trip-card flex">
-              <div class="trip-card-image">
-                <%= image_tag("logo.png", width: "72px") %>
-              </div>
-              <div class="trip-card-info">
-                <p class="card-info-bold"><%= booking.listing.country %></p>
-                <div class="card-info-light">
-                  <p>Host by <%= booking.listing.host.first_name %></p>
-                  <p><%= booking.start_date %> - <%= booking.end_date %></p>
+        <% @past_bookings.each do |booking| %>
+          <%# #change to make it responsive %>
+          <div class="col-md-4">
+            <%= link_to booking_path(booking), class: "link" do %>
+              <div class="trip-card flex">
+                <div class="trip-card-image">
+                  <%= image_tag("logo.png", width: "72px") %>
+                </div>
+                <div class="trip-card-info">
+                  <p class="card-info-bold"><%= booking.listing.country %></p>
+                  <div class="card-info-light">
+                    <p>Host by <%= booking.listing.host.first_name %></p>
+                    <p><%= booking.start_date %> - <%= booking.end_date %></p>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
