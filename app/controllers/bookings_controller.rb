@@ -38,15 +38,14 @@ class BookingsController < ApplicationController
       render :new
     end
   end
+
   def edit
-    authorize @restaurant # Add this line
-    # [...]
-  end
-  def update
-    authorize @restaurant # Add this line
-    # [...]
+    authorize @booking
   end
 
+  def update
+    authorize @booking
+  end
 
   private
 
