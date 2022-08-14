@@ -6,11 +6,19 @@ class ListingPolicy < ApplicationPolicy
     end
   end
 
-  def edit?
+  def create?
     true
   end
 
   def show?
     true
+  end
+
+  def edit?
+    record.host == user
+  end
+
+  def update?
+    record.host == user
   end
 end
