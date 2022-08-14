@@ -43,10 +43,7 @@ hotels = {
 hotels.each do |hotel, address|
   title = hotel
   description = Faker::Lorem.paragraph(sentence_count: 3)
-  country = "Singapore"
-  # geocode = Geocoder.search(address).first
-  # lat = geocode.latitude
-  # lng = geocode.longitude
+  country = Faker::Address.country
   price_per_night = rand(100..700)
   bedroom_count = rand(1..5)
   bathroom_count = rand(1..5)
