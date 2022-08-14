@@ -43,8 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_084816) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "host_id"
-    t.decimal "lat", precision: 10, scale: 6
-    t.decimal "lng", precision: 10, scale: 6
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.index ["host_id"], name: "index_listings_on_host_id"
   end
 

@@ -5,6 +5,7 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
     @past_bookings = @bookings.select { |booking| booking.end_date < Date.today }
     @upcoming_bookings = @bookings.select { |booking| booking.end_date > Date.today }
+
   end
 
   def show
@@ -19,8 +20,14 @@ class BookingsController < ApplicationController
     @start_date = "#{start_day} #{start_month} #{start_year}"
     @end_date = "#{end_day} #{end_month} #{end_year}"
     @night_count = (@booking.end_date - @booking.start_date).to_i
-    @cleaning_fee = [10, 12, 15].sample
-    @service_fee = [10, 20, 25].sample
+    @cleaning_fee = rand(10..20)
+    @service_fee = rand(10..30)
+    @markers = [
+      {
+        lat: @booking.listing.latitude,
+        lng: @booking.listing.longitude
+      }
+    ]
   end
 
   private
