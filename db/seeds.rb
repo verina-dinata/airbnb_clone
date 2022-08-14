@@ -52,8 +52,10 @@ hotels.each do |hotel, address|
   bathroom_count = rand(1..5)
   guest_count = rand(1..8)
   bed_count = rand(1..5)
+  cleaning_fee = rand(10..20)
+  service_fee = rand(10..30)
   house_rules = Faker::Lorem.paragraph(sentence_count: 2)
-  listing = Listing.new(title: title, description: description, country: country, address: address, price_per_night: price_per_night, bedroom_count: bedroom_count, bathroom_count: bathroom_count, bed_count: bed_count, guest_count: guest_count, house_rules: house_rules)
+  listing = Listing.new(title: title, description: description, country: country, address: address, price_per_night: price_per_night, bedroom_count: bedroom_count, bathroom_count: bathroom_count, bed_count: bed_count, guest_count: guest_count, house_rules: house_rules, cleaning_fee: cleaning_fee, service_fee: service_fee)
   listing.host = User.all.sample
   listing.save!
 end
