@@ -1,4 +1,74 @@
-<div class="container">
-  <h1>Your upcoming stay with <%= @booking.listing.host.first_name %></h1>
+<div>
+  <div class="jumbotron booking-confirmed">
+    <div class="row">
+      <div class='col-6 p-4'>
+        <div>
+          <h3 class="my-3">Your upcoming stay with <%= @booking.listing.host.first_name %>!</h3>
+
+          <div class="my-3 d-flex align-items-center">
+            <div>
+              <%= image_tag("logo.png", class: "avatar-large") %>
+            </div>
+
+            <div class="ml-custom flex-grow-1">
+              <h5 class="my-0"><%= @booking.listing.host.first_name %></h5>
+              <p class="my-0"><%=  @booking.listing.country%></p>
+            </div>
+            <div>
+              <%= link_to "Cancel this trip", '#', class: "btn ml-custom cancel flex-grow-3"%>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%= image_tag 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80', width: "100%" %>
+        </div>
+        <h5 class="my-4 fw-custom"><%= @booking.listing.title %></h5>
+        <div class="d-flex justify-content-between">
+          <p><%= @start_date_day %></p>
+          <p><%= @end_date_day %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><%= @start_date %></p>
+          <p><%= @end_date %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Check-in after 3PM</p>
+          <p>Checkout 11AM</p>
+        </div>
+        <hr>
+        <h5 class="my-4 fw-custom">Guest</h5>
+        <p><%= @booking.guest_count %></p>
+        <hr>
+        <h5 class="my-4 fw-custom">Confirmation Code</h5>
+        <p>FGH23M</p>
+        <hr>
+        <h5 class="my-4 fw-custom">Payment amount</h5>
+        <div class="d-flex justify-content-between">
+          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @night_count %> nights</p>
+          <p>$<%= @booking.payment_amount.to_i %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Cleaning Fees</p>
+          <p>$<%= @cleaning_fee %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Service Fees</p>
+          <p>$<%= @service_fee %></p>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <p class="fw-custom">Total</p>
+          <p>$<%= @booking.payment_amount.to_i + @cleaning_fee + @service_fee %></p>
+        </div>
+        <div class="text-center">
+          <%= link_to "Send #{@booking.listing.host.first_name} a message", '#', class: "btn chat"%>
+        </div>
+      </div>
+
+      <div class='col-6' style="background-image: url('https://www.thestatesman.com/wp-content/uploads/2020/04/googl_ED.jpg')">
+        test
+      </div>
+    </div>
+  </div>
+  <img src="" alt="">
 </div>
-<img src="" alt="">
