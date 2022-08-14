@@ -8,6 +8,7 @@ class BookingsController < ApplicationController
   end
 
   def show
+    authorize @booking
     @start_date_day = @booking.start_date.strftime('%A')
     @end_date_day = @booking.end_date.strftime('%A')
     @start_date = beautify_start_date
@@ -21,10 +22,32 @@ class BookingsController < ApplicationController
     ]
   end
 
+  def new
+    @booking = Booking.new(booking_params)
+    authorize @booking
+  end
+
+  def create
+    @booking = Booking.new(booking_params)
+    @booking.guest = current_user
+    # @booking.listing =
+    authorize @booking
+    if @booking.save!
+      redirect_to booking_path(booking), notice: "You have submitted your booking request!."
+    else
+      render :new
+    end
+
+  end
+
   private
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def booking_params
+    params.require(:booking).permit(:start_date, :end_date, :additional_requests, :guest_count, :payment_amount)
   end
 
   def beautify_start_date
