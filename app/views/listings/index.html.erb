@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <% @listings.each do |listing| %>
-  <%= link_to listing.title, listing_path(listing) %>
+  <%= link_to listing.title, listing_path(listing), style: "text-decoration:none" %>
   <br>
   <%= listing.country %>
   <p>$<%= listing.price_per_night%> SGD night </p>
