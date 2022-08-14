@@ -1,6 +1,6 @@
-.my-list-flex {
+.flex {
   display: flex;
-  justify-content: space-between;
+
 }
 
 .list-flex {
@@ -10,4 +10,12 @@
 
 .title-text {
   text-shadow: 1px 1px rgba($color: #3e3e3e, $alpha: 0.4);
+}
+
+.trip-margin {
+  margin: 20px 0;
+}
+
+.col-md-4 {
+  padding: 0;
 }
