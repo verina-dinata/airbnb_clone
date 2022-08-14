@@ -1,0 +1,88 @@
+<div>
+  <div class="jumbotron" style="height: 100vh">
+    <div class="row">
+      <div class='col-6 col-lg-4 p-5'>
+        <div>
+          <h3 class="my-3">
+          <% if @booking.end_date < Date.today %>
+            Your stay at <%= @booking.listing.host.first_name %>'s place
+          <% else %>
+            Your upcoming stay with <%= @booking.listing.host.first_name %>!
+          <% end %>
+          </h3>
+
+          <div class="my-3 d-flex align-items-center">
+            <div>
+              <%= image_tag("logo.png", class: "avatar-large") %>
+            </div>
+
+            <div class="ml-custom flex-grow-1">
+              <h5 class="my-0"><%= @booking.listing.host.first_name %></h5>
+              <p class="my-0"><%=  @booking.listing.country%></p>
+            </div>
+            <div>
+              <% if @booking.end_date < Date.today %>
+                <%= link_to "Rate this trip", '#', class: "booking-btn ml-custom cancel flex-grow-3"%>
+              <% else %>
+                <%= link_to "Cancel this trip", '#', class: "booking-btn ml-custom cancel flex-grow-3"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%= image_tag 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80', width: "100%" %>
+        </div>
+        <h5 class="my-4 fw-custom"><%= @booking.listing.title %></h5>
+        <div class="d-flex justify-content-between">
+          <p><%= @start_date_day %></p>
+          <p><%= @end_date_day %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p><%= @start_date %></p>
+          <p><%= @end_date %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Check-in after 3PM</p>
+          <p>Checkout 11AM</p>
+        </div>
+        <hr>
+        <h5 class="my-4 fw-custom">Guest</h5>
+        <p><%= @booking.guest_count %></p>
+        <hr>
+        <h5 class="my-4 fw-custom">Confirmation Code</h5>
+        <p>FGH23M</p>
+        <hr>
+        <h5 class="my-4 fw-custom">Payment amount</h5>
+        <div class="d-flex justify-content-between">
+          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @night_count %> nights</p>
+          <p>$<%= @booking.payment_amount.to_i %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Cleaning Fees</p>
+          <p>$<%= @booking.listing.cleaning_fee %></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Service Fees</p>
+          <p>$<%= @booking.listing.service_fee %></p>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <p class="fw-custom">Total</p>
+          <p>$<%= @booking.payment_amount.to_i + @booking.listing.cleaning_fee + @booking.listing.service_fee %></p>
+        </div>
+        <div class="text-center">
+          <%= link_to "Send #{@booking.listing.host.first_name} a message", '#', class: "booking-btn chat"%>
+        </div>
+      </div>
+      <div class='col-6 col-lg-8'>
+        <div style="width: 100%; height: 100%;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
