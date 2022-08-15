@@ -32,4 +32,19 @@ export default class extends Controller {
     window.location = url
   }
 
+  cancelBooking(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation()
+    fetch(event.target.href, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        location.reload()
+      })
+
+  }
+
 }

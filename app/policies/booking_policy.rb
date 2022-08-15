@@ -22,4 +22,10 @@ class BookingPolicy < ApplicationPolicy
     # user: the `current_user` signed in with Devise
   end
 
+  def cancel?
+    record.pending_host_confirmation?
+    #   render json: { message: "Cancel failed. Booking has been accepted by host." }, status: :bad_request
+    #   return
+    # end
+  end
 end

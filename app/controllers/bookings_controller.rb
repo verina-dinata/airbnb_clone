@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show]
+  before_action :set_booking, only: [:show, :cancel]
   before_action :set_listing, only: [:new, :create]
+  skip_before_action :verify_authenticity_token, only: [:cancel]
 
   def index
     @bookings = policy_scope(Booking)
@@ -56,6 +57,13 @@ class BookingsController < ApplicationController
 
   def update
     authorize @booking
+  end
+
+  def cancel
+    authorize @booking
+
+    @booking.cancelled_by_guest!
+    render json: { message: "Cancel successful" }, status: :ok
   end
 
   private
