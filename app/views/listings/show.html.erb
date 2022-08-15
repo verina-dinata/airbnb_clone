@@ -1,6 +1,9 @@
 <div class="container">
   <div class="mb-2">
     <%= image_tag("logo.png", width: "400px", height: "400px") %>
+    <% @listing.images.each do |image| %>
+  <%= cl_image_tag image.key, height: 300, width: 400, crop: :fill %>
+<% end %>
   </div>
   <h5><strong><%= @listing.title%> hosted by <%= @listing.host.first_name %></strong></h5>
   <p>
