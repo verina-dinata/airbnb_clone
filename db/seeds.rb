@@ -14,8 +14,8 @@ User.destroy_all
 
 
 
-puts "Creating 10 Faker users (userX@gmail.com) (PW:Abc123!!)"
-10.times do |i|
+puts "Creating 3 Faker users (userX@gmail.com) (PW:Abc123!!)"
+3.times do |i|
   user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -59,7 +59,7 @@ end
 
 puts "Creating Bookings"
 
-5.times do
+10.times do
   start_date = Faker::Date.between(from: Date.today - 6.month, to: Date.today + 6.month)
   end_date = start_date + rand(1..5)
   additional_requests = Faker::Lorem.paragraph(sentence_count: 2)
