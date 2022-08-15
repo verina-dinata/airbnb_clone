@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :listings
   resources :bookings, except: %i[delete destroy]
-  post "bookings/:id", to: "bookings#cancel", as: :cancel_booking
+  post "bookings/:id/cancel", to: "bookings#cancel", as: :cancel_booking
 end
