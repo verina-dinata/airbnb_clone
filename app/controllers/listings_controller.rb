@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: %i[show edit update]
+  before_action :set_listing, only: %i[show edit update destroy]
 
   def index
     @listings = policy_scope(Listing)
@@ -38,6 +38,16 @@ class ListingsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @listing
+    @listing.destroy
+
+    # respond_to do |format|
+    #   format.html { redirect_to listings_path, notice: "Listing was successfully destroyed." }
+    # end
+    redirect_to listings_path, status: :see_other, notice: "Listing was successfully destroyed."
+  end
+
   private
 
   def set_listing
@@ -46,6 +56,6 @@ class ListingsController < ApplicationController
 
   def listing_params
     params.require(:listing).permit(:title, :description, :address, :country, :price_per_night, :bedroom_count,
-      :bathroom_count, :bed_count, :guest_count, :house_rules)
+                                    :bathroom_count, :bed_count, :guest_count, :house_rules)
   end
 end

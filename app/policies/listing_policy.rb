@@ -21,4 +21,8 @@ class ListingPolicy < ApplicationPolicy
   def update?
     record.host == user
   end
+
+  def destroy?
+    record.host == user
+  end
 end
