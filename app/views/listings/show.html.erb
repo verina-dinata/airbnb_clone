@@ -1,5 +1,5 @@
 <div class="container">
-  <div>
+  <div class="mb-2">
     <%= image_tag("logo.png", width: "400px", height: "400px") %>
   </div>
   <h5><strong><%= @listing.title%> hosted by <%= @listing.host.first_name %></strong></h5>
@@ -8,7 +8,6 @@
     <%= @listing.bedroom_count %> bedrooms ·
     <%= @listing.bed_count%> bed ·
     <%= @listing.bathroom_count%> bathrooms
-    <%=  @listing.description  %>
   </p>
   <% if policy(@listing).edit? %>
     <%= link_to "Edit this listing", edit_listing_path(@listing) %>
