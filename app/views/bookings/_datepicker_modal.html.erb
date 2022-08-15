@@ -4,7 +4,7 @@
 <!-- Modal -->
 <div class="modal fade" id="datepicker" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content" data-controller="booking">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Edit dates</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -12,12 +12,15 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="date" value="<%= @booking.start_date%>" min="<%= Date.today %>" id="new_start_date">
-        <input type="date" value="<%= @booking.end_date%>" min="<%= Date.today %>" id="new_end_date">
+        <input type="date" data-booking-target="startDate" value="<%= @booking.start_date%>" min="<%= Date.today %>" id="new_start_date">
+        <input type="date" data-booking-target="endDate" value="<%= @booking.end_date%>" min="<%= Date.today %>" id="new_end_date">
+        <br>
+        <span class="text-danger" data-booking-target="dateError"></span>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" data-action="click->booking#saveDate">Save</button>
       </div>
     </div>
   </div>
