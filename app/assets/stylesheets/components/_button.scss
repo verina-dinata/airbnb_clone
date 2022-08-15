@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .btn-ghost {
   color: #4A4A4A;
   border: 1px solid #4A4A4A;
@@ -39,4 +40,36 @@
 .btn-gradient:hover {
   background: linear-gradient(#147EFF, #0F67DA);
   color: white;
+=======
+.booking-btn {
+  border: 1px solid rgb(255, 49, 87);
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  padding: 8px 16px;
+
+  &:hover {
+    color: black;
+    border: 1px solid black;
+  }
+}
+
+.chat {
+  display: block;
+  background-color: rgb(255, 49, 87);
+  width: 100%;
+  margin: 20px 0;
+  padding: 8px 20px;
+  &:hover {
+    background-color: white;
+    color: rgb(255, 49, 87);
+    border: 1px solid rgb(255, 49, 87);
+  }
+}
+
+.cancel {
+  font-size: 12px;
+  color: rgb(255, 49, 87);
+  white-space: nowrap;
+>>>>>>> master
 }

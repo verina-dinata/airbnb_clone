@@ -1,3 +1,4 @@
+
 .card-img {
   width: 150px;
 }
@@ -81,4 +82,71 @@
   .cards {
     grid-template-columns: 1fr 1fr 1fr;
   }
+}
+
+.trip-card {
+  width: 270px; // change to make it responsive
+  height: 72px;
+  margin: 10px 10px;
+  justify-content: flex-start;
+  color: black;
+  // position: relative;
+  // margin: .5rem 0 1rem 0;
+  // background-color: #fff;
+  // border-radius: 2px;
+  // box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+.trip-card-image {
+  // height: 60px;
+  // width: 60px;
+  width: 72px;
+  border-radius: 20px;
+  background-position: center;
+  background-size: cover;
+
+}
+
+.trip-card-info {
+  // height: 50px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  width: 270px;
+  margin:5px 10px;
+
+
+}
+.link {
+  text-decoration: none;
+}
+
+.card-info-bold {
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.card-info-light p {
+  margin-bottom: 0;
+  font-size: smaller;
+  font-weight: lighter;
+  color: rgb(140, 140, 140)
+}
+
+.trip {
+  margin: 0 10px;
+}
+
+.summary-card {
+  width: 80%;
+  height: 100%;
+  border: 1px solid rgb(205, 205, 205);
+  box-shadow: 2px 2px 10px rgb(140, 140, 140);
+}
+
+.summary-card-picture {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
 }

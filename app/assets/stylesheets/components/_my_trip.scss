@@ -1,0 +1,31 @@
+.flex {
+  display: flex;
+
+}
+
+.list-flex {
+  display: flex;
+  justify-content: end;
+}
+
+.title-text {
+  text-shadow: 1px 1px rgba($color: #3e3e3e, $alpha: 0.4);
+}
+
+.trip-margin {
+  margin: 20px 0;
+}
+
+
+.ml-custom{
+  margin-left: 10px;
+}
+
+.fw-custom {
+  font-weight: bold;
+}
+
+// todo
+.col-md-4 {
+  padding: 0;
+}
