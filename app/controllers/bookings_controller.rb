@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show]
+  before_action :set_listing, only: [:new, :create]
 
   def index
     @bookings = policy_scope(Booking)
@@ -17,9 +18,9 @@ class BookingsController < ApplicationController
     ]
   end
 
-  #http://localhost:3000/bookings/new?start_date=2022-10-10&end_date=2022-11-11&guest_count=5&listing_id=40
+  # http://localhost:3000/bookings/new?start_date=2022-10-10&end_date=2022-10-18&guest_count=5&listing_id=40
   def new
-    listing = Listing.find(params[:listing_id])
+
     # TODO: make sure listing don't belong to the current user :D lol
     # redirect with notice
     # if listing.host == current_user
@@ -28,7 +29,7 @@ class BookingsController < ApplicationController
       start_date: params[:start_date],
       end_date: params[:end_date],
       guest_count: params[:guest_count],
-      listing: listing
+      listing: @listing
     )
 
     @guest_count = params[:guest_count]
@@ -38,12 +39,12 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.guest = current_user
-    # @booking.listing =
+    @booking.listing = @listing
     authorize @booking
     if @booking.save!
       redirect_to booking_path(booking), notice: "You have submitted your booking request!."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -59,6 +60,10 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def set_listing
+    @listing = Listing.find(params[:listing_id])
   end
 
   def booking_params
