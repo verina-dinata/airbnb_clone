@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: %i[show edit]
+  before_action :set_listing, only: %i[show edit update]
 
   def index
     @listings = policy_scope(Listing)
@@ -21,7 +21,7 @@ class ListingsController < ApplicationController
     if @listing.save!
       redirect_to @listing, notice: "Listing was successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -31,6 +31,11 @@ class ListingsController < ApplicationController
 
   def update
     authorize @listing
+    if @listing.update(listing_params)
+      redirect_to @listing, notice: "Listing has been updated."
+    else
+      render :edit
+    end
   end
 
   private
