@@ -34,12 +34,12 @@
         </div>
         <h5 class="my-4 fw-custom"><%= @booking.listing.title %></h5>
         <div class="d-flex justify-content-between">
-          <p><%= @start_date_day %></p>
-          <p><%= @end_date_day %></p>
+          <p><%= @booking.start_date.strftime("%A") %></p>
+          <p><%= @booking.end_date.strftime("%A") %></p>
         </div>
         <div class="d-flex justify-content-between">
-          <p><%= @start_date %></p>
-          <p><%= @end_date %></p>
+          <p><%= @booking.start_date.strftime("%d %h %Y") %></p>
+          <p><%= @booking.end_date.strftime("%d %h %Y") %></p>
         </div>
         <div class="d-flex justify-content-between">
           <p>Check-in after 3PM</p>
@@ -54,7 +54,7 @@
         <hr>
         <h5 class="my-4 fw-custom">Payment amount</h5>
         <div class="d-flex justify-content-between">
-          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @night_count %> nights</p>
+          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @booking.night_count %> nights</p>
           <p>$<%= @booking.payment_amount.to_i %></p>
         </div>
         <div class="d-flex justify-content-between">

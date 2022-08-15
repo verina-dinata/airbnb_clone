@@ -7,4 +7,9 @@ class Booking < ApplicationRecord
   validates :guest_count, numericality: { only_integer: true }
 
   enum :status, { pending_host_confirmation: 0, accepted_by_host: 1, cancelled_by_host: 2, cancelled_by_guest: 3 }
+
+
+  def night_count
+    (end_date - start_date).to_i
+  end
 end

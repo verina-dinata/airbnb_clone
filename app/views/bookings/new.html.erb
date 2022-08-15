@@ -1,8 +1,50 @@
 <div class="row mx-5">
   <div class="col-lg-6 col-sm-12">
-    <div class="bg-primary">
-      <p>test</p>
+    <div class="">
+      <div class="d-flex">
+        <div class="m-2 back_link">
+          <%= link_to "#" do %>
+            <i class="fa-solid fa-chevron-left"></i>
+          <% end %>
+        </div>
+        <h1>Request to book</h1>
+      </div>
+      <h4>Your trip</h4>
+      <h6>Dates</h6>
+      <div class="d-flex justify-content-between">
+        <p><%= @booking.start_date.strftime("%d %h %Y") %> - <%= @booking.end_date.strftime("%d %h %Y") %></p>
+        <div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            Edit
+          </button>
+
+          <%= render "datepicker_modal", booking: @booking  %>
+
+
+
+
+        </div>
+      </div>
+      <h6>Guests</h6>
+      <div class="d-flex justify-content-between">
+        <p><%= @guest_count %> guests</p>
+        <div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            Edit
+          </button>
+
+          <%= render "datepicker_modal"  %>
+        </div>
+      </div>
+      <hr>
+      <h4>Additional information for your trip</h4>
+      <h6>Message the host</h6>
+      <p>Let the host know why you're travelling and when you'll check in</p>
     </div>
+    <%= simple_form_for(@booking) do |f| %>
+      <%= f.date_select :start_date, as: :datepicker %>
+      <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
 
   </div>
   <div class='col-lg-6 col-sm-12'>
