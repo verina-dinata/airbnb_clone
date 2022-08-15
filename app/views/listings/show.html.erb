@@ -10,8 +10,13 @@
     <%= @listing.bathroom_count%> bathrooms
   </p>
   <% if policy(@listing).edit? %>
-    <%= link_to "Edit this listing", edit_listing_path(@listing) %>
+    <%= link_to "Edit", edit_listing_path(@listing) %>
   <% end %>
+
   <%= link_to "Back", listings_path %>
-  <%# <%= link_to "Edit", edit_listing_path(@listing) %>
+
+  <% if policy(@listing).destroy? %>
+    <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
+
 </div>
