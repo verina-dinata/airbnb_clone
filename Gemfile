@@ -59,6 +59,8 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'country_select'
 
 gem "geocoder"
+gem "dotenv-rails", groups: [:development, :test]
+gem "cloudinary"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

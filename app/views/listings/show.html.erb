@@ -1,5 +1,9 @@
 <div class="container">
   <h1><%= @listing.title %></h1>
+  <%= image_tag("logo.png", width: "400px", height: "400px") %>
+  <% @listing.images.each do |image| %>
+    <%= cl_image_tag image.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
   <%= image_tag 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGJlZHJvb218ZW58MHx8MHx8&w=1000&q=80', width: "100%" %>
   <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12 bg-success">
