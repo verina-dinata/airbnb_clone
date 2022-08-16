@@ -12,3 +12,6 @@ application.register("map", MapController)
 
 import BookingController from "./booking_controller"
 application.register("booking", BookingController)
+
+import ListingController from "./listing_controller"
+application.register("listing", ListingController)

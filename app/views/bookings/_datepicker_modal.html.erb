@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
         <input type="date" data-booking-target="startDate" value="<%= @booking.start_date%>" min="<%= Date.today %>" id="new_start_date">
-        <input type="date" data-booking-target="endDate" value="<%= @booking.end_date%>" min="<%= Date.today %>" id="new_end_date">
+        <input type="date" data-booking-target="endDate" value="<%= @booking.end_date%>" min="<%= Date.today + 1.day %>" id="new_end_date">
         <br>
         <span class="text-danger" data-booking-target="dateError"></span>
       </div>

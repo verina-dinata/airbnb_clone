@@ -44,7 +44,5 @@ export default class extends Controller {
         console.log(data)
         location.reload()
       })
-
   }
-
 }

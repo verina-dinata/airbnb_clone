@@ -13,7 +13,6 @@
 
 <div class="container">
 
-
   <%# <h1><%= @listing.title %>
   <%# </h1> %>
   <%# <%= image_tag("logo.png", width: "400px", height: "400px") %>
@@ -39,14 +38,87 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-12 bg-primary">
-      TEST
+
+    <div class="col-lg-5 col-md-4 col-sm-12 summary-card p-4" data-controller="listing">
+
+      <div class="">
+        <div class="d-flex flex-row">
+          <h5 class="fw-bold">$<%= @listing.price_per_night.to_i %></h5>
+          <p class="">night</p>
+        </div>
+
+        <div class="d-flex">
+          <i class="fa-solid fa-star"></i>
+          <p class="mx-1"><strong>4.63</strong> (82 reviews)</p>
+        </div>
+
+        <form>
+          <div class="row">
+            <div class="col">
+              <label for="formGroupExampleInput">Checkin</label>
+              <input id="startDate" class="form-control" data-listing-target="startDate" type="date" value="<%= Date.today.strftime("%Y-%m-%d") %>" data-action="change->listing#startDateChange" min="<%= Date.today %>"/>
+            </div>
+
+            <div class="col">
+              <label for="formGroupExampleInput">Checkout</label>
+              <input id="endDate" class="form-control" data-listing-target="endDate" type="date" value="<%= (Date.today + 1).strftime("%Y-%m-%d") %>" data-action="change->listing#endDateChange" min="<%= Date.today + 1.day %>" />
+            </div>
+          </div>
+
+          <label for="formGroupExampleInput">Guests</label>
+          <br>
+          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" data-listing-target="guestCount">
+            <option selected>1</option>
+            <% (@listing.guest_count + 1).times do |i| %>
+              <% next if i < 2 %>
+              <option value=" <%= i %>"><%= i %></option>
+            <% end %>
+          </select>
+
+          <h6 class="my-4 fw-custom">Payment amount</h6>
+          <div class="d-flex justify-content-between">
+            <p>$<%= @listing.price_per_night.to_i %> x
+              <span data-listing-target="nightCount">
+                1
+              </span>
+              nights
+            </p>
+            <p>$<span data-listing-target="subTotal"><%= total_amount = @listing.price_per_night.to_i %></span>
+            </p>
+          </div>
+
+          <div class="d-flex justify-content-between">
+          <p>Cleaning Fees</p>
+          <p>$<%= @listing.cleaning_fee %></p>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <p>Service Fees</p>
+            <p>$<%= @listing.service_fee %></p>
+          </div>
+
+          <hr>
+
+          <div class="d-flex justify-content-between mb-3">
+            <p class="fw-custom">Total</p>
+            <p>$
+              <span data-listing-target="totalAmount">
+                <%= @listing.price_per_night.to_i %>
+              </span>
+            </p>
+          </div>
+
+          <button type="submit" class="booking-btn chat" href="<%= new_booking_path %>" data-action="click->listing#reserveBooking">Reserve</button>
+
+        </form>
+      </div>
     </div>
   </div>
 
   <%# <h5><strong><%= @listing.title %>
   <%# hosted by <%= @listing.host.first_name %>
   <%# </strong></h5> %>
+
 
   <% if policy(@listing).edit? %>
     <%= link_to "Edit", edit_listing_path(@listing) %>
@@ -61,5 +133,12 @@
   <div class="my-4">
     <h5>Where you'll be</h5>
   </div>
+
+  <script>
+    const pricePerNight = <%= @listing.price_per_night %>
+    const cleaningFee = <%= @listing.cleaning_fee %>
+    const serviceFee = <%= @listing.service_fee %>
+    const listingId = <%= @listing.id %>
+  </script>
 
 </div>
