@@ -1,5 +1,5 @@
 <div class="row mx-5 my-3">
-  <div class="col-lg-6 col-sm-12 px-5">
+  <div class="col-lg-6 col-md-6 col-sm-12 px-5">
     <div class="">
       <div class="d-flex">
         <div class="m-2 back_link">
@@ -8,6 +8,9 @@
           <% end %>
         </div>
         <h1><strong>Request to book</strong></h1>
+      </div>
+      <div class="d-xs-block d-sm-block d-md-none d-lg-none d-xl-none">
+        <%= render "summary_card" %>
       </div>
       <h4 class="my-4">Your trip</h4>
       <h6 class="my-3"><strong>Dates</strong></h6>
@@ -61,38 +64,7 @@
       <%= link_to "Request to book", "#", class: "booking-btn chat"%>
     </div>
   </div>
-  <div class='col-lg-6 col-sm-12 p-3 d-flex justify-content-center'>
-    <div class="summary-card">
-      <div>
-        <%= image_tag 'https://cdn.decoist.com/wp-content/uploads/2017/03/Modern-apartment-units-inside-heritage-building-Down-Under.jpg', width: "100%", class: "summary-card-picture" %>
-      </div>
-      <div class="mx-5">
-        <h5 class="my-4 fw-custom"><%= @booking.listing.title %></h5>
-        <div class="d-flex">
-          <i class="fa-solid fa-star"></i>
-          <p class="mx-1"><strong>4.63</strong> (82 reviews)</p>
-        </div>
-        <hr>
-        <h6 class="my-4 fw-custom">Payment amount</h6>
-        <% total_amount = @booking.listing.price_per_night.to_i * @booking.night_count %>
-        <div class="d-flex justify-content-between">
-          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @booking.night_count %> night(s)</p>
-          <p>$<%= total_amount %></p>
-        </div>
-        <div class="d-flex justify-content-between">
-          <p>Cleaning Fee</p>
-          <p>$<%= @booking.listing.cleaning_fee %></p>
-        </div>
-        <div class="d-flex justify-content-between">
-          <p>Service Fee</p>
-          <p>$<%= @booking.listing.service_fee %></p>
-        </div>
-        <hr>
-        <div class="d-flex justify-content-between mb-3">
-          <p class="fw-custom">Total</p>
-          <p>$<%= total_amount + @booking.listing.cleaning_fee + @booking.listing.service_fee %></p>
-        </div>
-      </div>
-    </div>
+  <div class='col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-center d-none d-md-block'>
+    <%= render "summary_card" %>
   </div>
 </div>
