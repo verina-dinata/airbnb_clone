@@ -1,17 +1,44 @@
 <div class="container">
-  <div class="mb-2">
-    <%= image_tag("logo.png", width: "400px", height: "400px") %>
-  </div>
-  <h5><strong><%= @listing.title%> hosted by <%= @listing.host.first_name %></strong></h5>
-  <p>
-    <%= @listing.guest_count %> guests ·
-    <%= @listing.bedroom_count %> bedrooms ·
-    <%= @listing.bed_count%> bed ·
-    <%= @listing.bathroom_count%> bathrooms
-  </p>
-  <% if policy(@listing).edit? %>
-    <%= link_to "Edit this listing", edit_listing_path(@listing) %>
+  <h1><%= @listing.title %></h1>
+  <%= image_tag("logo.png", width: "400px", height: "400px") %>
+  <% @listing.images.each do |image| %>
+    <%= cl_image_tag image.key, height: 300, width: 400, crop: :fill %>
   <% end %>
+  <%= image_tag 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGJlZHJvb218ZW58MHx8MHx8&w=1000&q=80', width: "100%" %>
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-12 bg-success">
+      <div class="my-3 d-flex align-items-center">
+        <div class="ml-custom flex-grow-1">
+          <h5 class="my-0">Entire unit hosted by <%= @listing.host.first_name %></h5>
+          <p>
+            <%= @listing.guest_count %> guests ·
+            <%= @listing.bedroom_count %> bedrooms ·
+            <%= @listing.bed_count%> bed ·
+            <%= @listing.bathroom_count%> bathrooms
+          </p>
+        </div>
+        <div>
+          <%= image_tag("logo.png", class: "avatar-large") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 bg-primary">
+      TEST
+    </div>
+  </div>
+
+
+
+  <h5><strong><%= @listing.title%> hosted by <%= @listing.host.first_name %></strong></h5>
+
+  <% if policy(@listing).edit? %>
+    <%= link_to "Edit", edit_listing_path(@listing) %>
+  <% end %>
+
   <%= link_to "Back", listings_path %>
-  <%# <%= link_to "Edit", edit_listing_path(@listing) %>
+
+  <% if policy(@listing).destroy? %>
+    <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
+
 </div>
