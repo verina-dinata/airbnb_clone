@@ -40,10 +40,11 @@ class BookingsController < ApplicationController
   end
 
   def create
+    authorize @booking
     @booking = Booking.new(booking_params)
     @booking.guest = current_user
     @booking.listing = @listing
-    authorize @booking
+
     if @booking.save!
       redirect_to booking_path(booking), notice: "You have submitted your booking request!."
     else
@@ -77,7 +78,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :additional_requests, :guest_count, :payment_amount)
+    params.require(:booking).permit(:start_date, :end_date, :additional_requests, :guest_count)
   end
 
   def calculate_total_nights_amount
