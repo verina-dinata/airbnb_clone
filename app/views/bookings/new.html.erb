@@ -14,22 +14,24 @@
       <div class="d-flex justify-content-between">
         <p><%= @booking.start_date.strftime("%d %h %Y") %> - <%= @booking.end_date.strftime("%d %h %Y") %></p>
         <div>
-          <button type="button" class="booking-btn ml-custom cancel flex-grow-3" data-bs-toggle="modal" data-bs-target="#datepicker">
+          <button type="button" class="booking-btn ml-custom cancel flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#datepicker">
             Edit
           </button>
 
           <%= render "datepicker_modal" %>
-
-
-
-
         </div>
       </div>
       <h6 class="my-3"><strong>Guests</strong></h6>
       <div class="d-flex justify-content-between">
-        <p><%= @guest_count %> guests</p>
+        <p><%= @guest_count %>
+          <% if @booking.guest_count == 1 %>
+            guest
+          <% else %>
+            guests
+          <% end %>
+        </p>
         <div>
-          <button type="button" class="booking-btn ml-custom cancel flex-grow-3" data-bs-toggle="modal" data-bs-target="#guest">
+          <button type="button" class="booking-btn ml-custom cancel flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#guest">
             Edit
           </button>
 
@@ -55,7 +57,7 @@
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
 
-    <div class="text-center">
+    <div class="text-center ">
       <%= link_to "Request to book", "#", class: "booking-btn chat"%>
     </div>
   </div>
@@ -74,15 +76,15 @@
         <h6 class="my-4 fw-custom">Payment amount</h6>
         <% total_amount = @booking.listing.price_per_night.to_i * @booking.night_count %>
         <div class="d-flex justify-content-between">
-          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @booking.night_count %> nights</p>
+          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @booking.night_count %> night(s)</p>
           <p>$<%= total_amount %></p>
         </div>
         <div class="d-flex justify-content-between">
-          <p>Cleaning Fees</p>
+          <p>Cleaning Fee</p>
           <p>$<%= @booking.listing.cleaning_fee %></p>
         </div>
         <div class="d-flex justify-content-between">
-          <p>Service Fees</p>
+          <p>Service Fee</p>
           <p>$<%= @booking.listing.service_fee %></p>
         </div>
         <hr>
