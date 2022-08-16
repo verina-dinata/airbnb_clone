@@ -42,10 +42,6 @@ class ListingsController < ApplicationController
   def destroy
     authorize @listing
     @listing.destroy
-
-    # respond_to do |format|
-    #   format.html { redirect_to listings_path, notice: "Listing was successfully destroyed." }
-    # end
     redirect_to listings_path, status: :see_other, notice: "Listing was successfully destroyed."
   end
 
