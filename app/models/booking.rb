@@ -10,7 +10,6 @@ class Booking < ApplicationRecord
 
   before_validation :calculate_payment
 
-
   def night_count
     (end_date - start_date).to_i
   end
