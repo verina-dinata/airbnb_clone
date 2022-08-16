@@ -3,7 +3,7 @@
     <div class="">
       <div class="d-flex">
         <div class="m-2 back_link">
-          <%= link_to "#", class: "link" do %>
+          <%= link_to listing_path(@listing), class: "link" do %>
             <i class="fa-solid fa-chevron-left"></i>
           <% end %>
         </div>
@@ -46,7 +46,7 @@
       <h6>Message the host</h6>
       <p class="small">Let the host know why you're travelling and when you'll check in</p>
     </div>
-    <div class="my-3 d-flex align-items-center">
+    <div class="my-3 d-flex align-items-center my-4">
       <div>
         <%= image_tag("logo.png", class: "avatar-large") %>
       </div>
@@ -57,10 +57,18 @@
       </div>
     </div>
     <div class="form-group textarea">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your additional requests"></textarea>
     </div>
 
-    <div class="text-center ">
+    <%= simple_form_for (@booking) do |f| %>
+      <%= f.input :start_date %>
+      <%= f.input :end_date %>
+      <%= f.input :guest_count %>
+      <%= f.input :additional_requests %>
+      <%= f.input :listing_id, input_html: { value: @booking.listing.id } %>
+      <%= f.button :submit %>
+    <% end %>
+    <div class="text-center">
       <%= link_to "Request to book", "#", class: "booking-btn chat"%>
     </div>
   </div>

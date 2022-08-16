@@ -14,6 +14,7 @@ export default class extends Controller {
     const newStartDate = this.startDateTarget.value
     const newEndDate = this.endDateTarget.value
 
+    alert('123')
     if (Date.parse(newStartDate) >= Date.parse(newEndDate)) {
       this.dateErrorTarget.innerHTML = 'End date should be greater than start date'
     } else {
@@ -21,9 +22,11 @@ export default class extends Controller {
         this.startDateTarget.value + '&end_date=' + this.endDateTarget.value + '&guest_count=' + params.guest_count + '&listing_id=' + params.listing_id;
       window.location = url
     }
+
   }
 
   saveGuest() {
+    alert('789')
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
@@ -33,6 +36,7 @@ export default class extends Controller {
   }
 
   cancelBooking(event) {
+    alert('456')
     event.preventDefault();
     event.stopImmediatePropagation()
     fetch(event.target.href, {

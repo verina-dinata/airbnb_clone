@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel]
-  before_action :set_listing, only: [:new, :create]
+  before_action :set_listing, only: [:new]
   skip_before_action :verify_authenticity_token, only: [:cancel]
 
   def index
@@ -40,13 +40,14 @@ class BookingsController < ApplicationController
   end
 
   def create
-    authorize @booking
     @booking = Booking.new(booking_params)
+    authorize @booking
     @booking.guest = current_user
-    @booking.listing = @listing
 
-    if @booking.save!
-      redirect_to booking_path(booking), notice: "You have submitted your booking request!."
+    debugger
+
+    if @booking.save
+      redirect_to booking_path(@booking), notice: "You have submitted your booking request!."
     else
       render :new, status: :unprocessable_entity
     end
@@ -78,7 +79,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :additional_requests, :guest_count)
+    params.require(:booking).permit(:start_date, :end_date, :additional_requests, :guest_count, :listing_id)
   end
 
   def calculate_total_nights_amount

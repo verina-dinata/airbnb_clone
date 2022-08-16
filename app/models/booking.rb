@@ -8,8 +8,14 @@ class Booking < ApplicationRecord
 
   enum :status, { pending_host_confirmation: 0, accepted_by_host: 1, cancelled_by_host: 2, cancelled_by_guest: 3 }
 
+  before_validation :calculate_payment
+
 
   def night_count
     (end_date - start_date).to_i
+  end
+
+  def calculate_payment
+    self.payment_amount = (end_date - start_date).to_i * listing.price_per_night.to_i
   end
 end
