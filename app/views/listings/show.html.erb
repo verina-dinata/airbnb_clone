@@ -111,11 +111,13 @@
     <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
   <% end %>
 
+<%# ------ Do not remove ------ %>
   <script>
     const pricePerNight = <%= @listing.price_per_night %>
     const cleaningFee = <%= @listing.cleaning_fee %>
     const serviceFee = <%= @listing.service_fee %>
     const listingId = <%= @listing.id %>
   </script>
+<%# ------ Do not remove ------ %>
 
 </div>
