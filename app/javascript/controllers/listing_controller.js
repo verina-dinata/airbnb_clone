@@ -36,13 +36,11 @@ export default class extends Controller {
   }
 
   reserveBooking(event) {
-    console.log(event.target.getAttribute('href'))
     event.preventDefault();
     event.stopImmediatePropagation()
     const newPath = event.target.getAttribute('href')
-    // console.log(newPath)
-    const url = newPath + '?' + 'start_date=' +
-      this.startDateTarget.value + '&end_date=' + this.endDateTarget.value + '&guest_count=' + this.guestCountTarget.value + '&listing_id=' + listingId;
+    const url = newPath + '?' + 'start_date=' + this.startDateTarget.value + '&end_date=' +
+      this.endDateTarget.value + '&guest_count=' + this.guestCountTarget.value + '&listing_id=' + listingId;
     window.location = url
   }
 

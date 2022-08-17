@@ -15,3 +15,6 @@ application.register("booking", BookingController)
 
 import ListingController from "./listing_controller"
 application.register("listing", ListingController)
+
+import MyListingsController from "./my_listings_controller"
+application.register("my_listings", MyListingsController)
