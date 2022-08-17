@@ -24,7 +24,6 @@ export default class extends Controller {
   }
 
   saveGuest() {
-    alert('789')
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 

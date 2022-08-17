@@ -36,7 +36,6 @@ export default class extends Controller {
   }
 
   reserveBooking(event) {
-    console.log(event.target.getAttribute('href'))
     event.preventDefault();
     event.stopImmediatePropagation()
     const newPath = event.target.getAttribute('href')

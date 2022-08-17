@@ -14,7 +14,7 @@ Listing.destroy_all
 User.destroy_all
 
 puts "Creating 3 Faker users (userX@gmail.com) (PW:Abc123!!)"
-2.times do |i|
+3.times do |i|
   user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -76,8 +76,8 @@ puts "Creating Bookings"
       booking.status = :pending_host_confirmation
     end
   end
-  booking.guest = User.all.sample
   booking.listing = Listing.all.sample
+  booking.guest = User.all.excluding(booking.listing.host).sample
   booking.payment_amount = (end_date - start_date).to_i * booking.listing.price_per_night
   booking.save!
 end

@@ -1,8 +1,8 @@
 <div class="container">
-  <div>
-    <h1>Your listings' bookings</h1>
-    <h5>Pending confirmation</h5>
-    <table class="table">
+  <div data-controller="my_listings">
+    <h1 class="mb-3">Your listings' bookings</h1>
+    <h5 class="mb-3">Pending confirmation</h5>
+    <table class="table mb-5">
     <thead>
       <tr>
         <th scope="col">No</th>
@@ -21,13 +21,17 @@
           <td><%= booking.start_date %></td>
           <td><%= booking.end_date %></td>
           <td><%= booking.guest.first_name %></td>
+          <td scope="col" class="d-flex">
+            <button data-action="click->my_listings#updateBooking" href="<%= host_cancel_booking_path(booking) %>" class="color-txt">Decline</button>
+            <button data-action="click->my_listings#updateBooking" href="<%= host_accept_booking_path(booking) %>" class="color-txt">Accept</button>
+          </td>
         </tr>
       <% end %>
     </tbody>
     </table>
 
-    <h5>Upcoming bookings</h5>
-    <table class="table">
+    <h5 class="mb-3">Upcoming bookings</h5>
+    <table class="table mb-5">
       <thead>
         <tr>
           <th scope="col">No</th>
@@ -55,6 +59,7 @@
 
   <div class="row d-flex justify-content-between">
     <%# <div class="col-lg-4 col-md-6 col-sm-12"> %>
+    <h1>Your listings</h1>
       <% @listings.each do |listing| %>
         <div class="card mx-2 my-3 col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
           <%= link_to listing_path(listing), class: "link" do %>
@@ -65,8 +70,9 @@
               <h6 class="card-title fw-bold mb-3"><%= listing.title %></h6>
             </div>
             <div class="d-flex justify-content-start">
-              <%= link_to "Edit", "#", class: "hollow-btn py-0 px-2" %>
-              <%= link_to "Delete", "#", class: "hollow-btn py-0 px-2 mx-2" %>
+              <%= link_to "Edit", edit_listing_path(listing), class: "hollow-btn py-0 px-2" %>
+              <%= link_to "Delete", listing_path(listing), class: "hollow-btn py-0 px-2 mx-2" %>
+
             </div>
           </div>
         </div>
@@ -74,17 +80,6 @@
     <%# </div> %>
     <div>
 
-    </div>
-  </div>
-  <div class=" mt-5">
-    <div class="d-flex justify-content-between">
-      <% @listings.each do |listing| %>
-        <div>
-          <%= link_to listing.title, listing_path(listing), class: "link" %>
-          <p class="mb-0"><%= listing.country %></p>
-          <p>$<%= listing.price_per_night%> SGD night</p>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>
