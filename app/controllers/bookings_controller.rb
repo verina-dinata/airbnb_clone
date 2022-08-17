@@ -5,8 +5,10 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = policy_scope(Booking)
-    @past_bookings = @bookings.select { |booking| booking.end_date < Date.today }
-    @upcoming_bookings = @bookings.select { |booking| booking.end_date > Date.today }
+    @upcoming_bookings = @bookings.select { |booking|
+      (booking.accepted_by_host? || booking.pending_host_confirmation?) && booking.end_date > Date.today }
+    @past_bookings = @bookings.select { |booking| booking.end_date < Date.today && booking.accepted_by_host? }
+    @cancelled_bookings = @bookings.select { |booking| booking.cancelled_by_guest? || booking.cancelled_by_host? }
   end
 
   def show
@@ -43,8 +45,6 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     authorize @booking
     @booking.guest = current_user
-
-    debugger
 
     if @booking.save
       redirect_to booking_path(@booking), notice: "You have submitted your booking request!."

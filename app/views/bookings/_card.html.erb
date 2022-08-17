@@ -1,20 +1,20 @@
-<div class='row'>
+<div class="row">
   <% bookings.each do |booking| %>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <%= link_to booking_path(booking), class: "link" do %>
-          <div class="trip-card d-flex">
-            <div classs="trip-card-image">
-              <%= image_tag("logo.png", width: "72px") %>
-            </div>
-            <div class="trip-card-info">
-              <p class="card-info-bold"><%= booking.listing.country %></p>
-              <div class="card-info-light">
-                <p>Host by <%= booking.listing.host.first_name %></p>
-                <p><%= booking.start_date %> - <%= booking.end_date %></p>
-              </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 pl-0">
+      <%= link_to booking_path(booking), class: "link" do %>
+        <div class="trip-card d-flex">
+          <div classs="trip-card-image">
+            <%= image_tag("logo.png", width: "72px") %>
+          </div>
+          <div class="trip-card-info">
+            <p class="card-info-bold"><%= booking.listing.country %></p>
+            <div class="card-info-light">
+              <p class="text-small">Host by <%= booking.listing.host.first_name %></p>
+              <p class="text-small"><%= booking.start_date %> - <%= booking.end_date %></p>
             </div>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>

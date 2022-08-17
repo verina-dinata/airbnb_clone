@@ -17,7 +17,7 @@
       <div class="d-flex justify-content-between">
         <p><%= @booking.start_date.strftime("%d %h %Y") %> - <%= @booking.end_date.strftime("%d %h %Y") %></p>
         <div>
-          <button type="button" class="booking-btn ml-custom cancel flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#datepicker">
+          <button type="button" class="hollow-btn flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#datepicker">
             Edit
           </button>
 
@@ -34,7 +34,7 @@
           <% end %>
         </p>
         <div>
-          <button type="button" class="booking-btn ml-custom cancel flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#guest">
+          <button type="button" class="hollow-btn flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#guest">
             Edit
           </button>
 
@@ -51,26 +51,21 @@
         <%= image_tag("logo.png", class: "avatar-large") %>
       </div>
 
-      <div class="ml-custom flex-grow-1">
+      <div class="flex-grow-1 mx-2">
         <h5 class="my-0"><%= @booking.listing.host.first_name %></h5>
         <p class="my-0"><%=  @booking.listing.country%></p>
       </div>
     </div>
-    <div class="form-group textarea">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your additional requests"></textarea>
-    </div>
 
     <%= simple_form_for (@booking) do |f| %>
-      <%= f.input :start_date %>
-      <%= f.input :end_date %>
-      <%= f.input :guest_count %>
-      <%= f.input :additional_requests %>
-      <%= f.input :listing_id, input_html: { value: @booking.listing.id } %>
-      <%= f.button :submit %>
+      <%= f.input :start_date, as: :hidden %>
+      <%= f.input :end_date, as: :hidden %>
+      <%= f.input :guest_count, as: :hidden %>
+      <%= f.input :additional_requests, placeholder: "Your additional requests", input_html: { rows: "3" },  label: false %>
+
+      <%= f.input :listing_id, :input_html => { value: @booking.listing.id }, as: :hidden %>
+      <%= f.submit 'Request to book', class: "btn submit-btn" %>
     <% end %>
-    <div class="text-center">
-      <%= link_to "Request to book", "#", class: "booking-btn chat"%>
-    </div>
   </div>
   <div class='col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-center d-none d-md-block'>
     <%= render "summary_card" %>
