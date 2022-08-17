@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
   belongs_to :host, class_name: 'User'
+  has_many :bookings
   has_many_attached :images
 
   validates :title, presence: true, length: { minimum: 6, maximum: 50, too_long: "Your title should be %{count} chars max." }

@@ -41,13 +41,14 @@
   margin-bottom: 0;
   font-weight: bold;
   font-size: 16px;
+  line-height: 1em;
 }
 
 .card-info-light p {
   margin-bottom: 0;
-  font-size: smaller;
-  font-weight: lighter;
-  color: rgb(140, 140, 140)
+  font-size: 14px;
+  font-weight: light;
+  color: rgb(115, 115, 115)
 }
 
 .trip {
@@ -59,13 +60,11 @@
   height: 100%;
   border: 1px solid rgb(205, 205, 205);
   box-shadow: 2px 2px 10px rgb(177, 177, 177);
-
-  .content {
-
-  }
+  border-radius: 10px;
 }
 
 .summary-card-picture {
+  border-radius: 10px 0;
   width: 100%;
   background-position: center;
   background-size: cover;
