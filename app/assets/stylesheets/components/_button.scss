@@ -35,3 +35,16 @@
   color: rgb(255, 49, 87);
   white-space: nowrap;
 }
+
+.listing-button {
+  border: 1px solid grey;
+  color: black;
+  border-radius: 5px;
+  text-decoration: none;
+  padding: 8px 16px;
+
+  &:hover {
+    color: grey;
+    border: 1px solid black;
+  }
+}
