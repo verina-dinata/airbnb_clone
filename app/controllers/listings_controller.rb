@@ -2,7 +2,18 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy]
 
   def index
-    @listings = policy_scope(Listing)
+    @listings = Listing.all
+  end
+
+  def my_listings
+    authorize Listing
+
+    @listings = current_user.listings.includes(:bookings)
+    bookings = @listings.map{ |l| l.bookings }.flatten.sort_by{ |b| b.start_date}
+    @pending_bookings = bookings.select { |b| b.pending_host_confirmation? }
+    @upcoming_bookings = bookings.select { |b| b.accepted_by_host? && b.start_date > Date.today }
+
+    # render 'index'
   end
 
   def show

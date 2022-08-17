@@ -1,0 +1,90 @@
+<div class="container">
+  <div>
+    <h1>Your listings' bookings</h1>
+    <h5>Pending confirmation</h5>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Listing Name</th>
+        <th scope="col">Check-in</th>
+        <th scope="col">Checkout</th>
+        <th scope="col">Guest Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pending_bookings.each_with_index do |booking, i|  %>
+        <tr>
+          <th scope="row"><%= i + 1 %></th>
+          <td><%= booking.listing.title %></td>
+          <td><%= booking.start_date %></td>
+          <td><%= booking.end_date %></td>
+          <td><%= booking.guest.first_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+
+    <h5>Upcoming bookings</h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Listing Name</th>
+          <th scope="col">Check-in</th>
+          <th scope="col">Checkout</th>
+          <th scope="col">Guest Name</th>
+          <th scope="col">Total Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @upcoming_bookings.each_with_index do |booking, i|  %>
+          <tr>
+            <th scope="row"><%= i + 1 %></th>
+            <td><%= booking.listing.title %></td>
+            <td><%= booking.start_date %></td>
+            <td><%= booking.end_date %></td>
+            <td><%= booking.guest.first_name %></td>
+            <td>$ <%= booking.payment_amount.to_i %>.00</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row d-flex justify-content-between">
+    <%# <div class="col-lg-4 col-md-6 col-sm-12"> %>
+      <% @listings.each do |listing| %>
+        <div class="card mx-2 my-3 col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
+          <%= link_to listing_path(listing), class: "link" do %>
+            <img class="card-img-top" src="https://media.architecturaldigest.com/photos/571e97ce818277135ff91620/master/w_2626,h_1821,c_limit/modernist-decor-inspiration-07.jpg" alt="Card image cap">
+          <% end %>
+          <div class="card-body">
+            <div style="height: 4em">
+              <h6 class="card-title fw-bold mb-3"><%= listing.title %></h6>
+            </div>
+            <div class="d-flex justify-content-start">
+              <%= link_to "Edit", "#", class: "hollow-btn py-0 px-2" %>
+              <%= link_to "Delete", "#", class: "hollow-btn py-0 px-2 mx-2" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <%# </div> %>
+    <div>
+
+    </div>
+  </div>
+  <div class=" mt-5">
+    <div class="d-flex justify-content-between">
+      <% @listings.each do |listing| %>
+        <div>
+          <%= link_to listing.title, listing_path(listing), class: "link" %>
+          <p class="mb-0"><%= listing.country %></p>
+          <p>$<%= listing.price_per_night%> SGD night</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
