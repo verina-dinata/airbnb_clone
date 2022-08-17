@@ -19,7 +19,7 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
     @listing.host = current_user
     authorize @listing
-    if @listing.save!
+    if @listing.save
       redirect_to @listing, notice: "Listing was successfully created."
     else
       render :new, status: :unprocessable_entity
