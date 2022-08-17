@@ -1,11 +1,14 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show]
-  before_action :set_listing, only: [:new, :create]
+  before_action :set_booking, only: [:show, :cancel, :host_cancel, :host_accept]
+  before_action :set_listing, only: [:new]
+  skip_before_action :verify_authenticity_token, only: [:cancel, :host_cancel, :host_accept]
 
   def index
     @bookings = policy_scope(Booking)
-    @past_bookings = @bookings.select { |booking| booking.end_date < Date.today }
-    @upcoming_bookings = @bookings.select { |booking| booking.end_date > Date.today }
+    @upcoming_bookings = @bookings.select { |booking|
+      (booking.accepted_by_host? || booking.pending_host_confirmation?) && booking.end_date > Date.today }
+    @past_bookings = @bookings.select { |booking| booking.end_date < Date.today && booking.accepted_by_host? }
+    @cancelled_bookings = @bookings.select { |booking| booking.cancelled_by_guest? || booking.cancelled_by_host? }
   end
 
   def show
@@ -13,8 +16,10 @@ class BookingsController < ApplicationController
     @markers = [
       {
         lat: @booking.listing.latitude,
-        lng: @booking.listing.longitude
+        lng: @booking.listing.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { booking: @booking })
       }
+
     ]
   end
 
@@ -38,11 +43,11 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.guest = current_user
-    @booking.listing = @listing
     authorize @booking
-    if @booking.save!
-      redirect_to booking_path(booking), notice: "You have submitted your booking request!."
+    @booking.guest = current_user
+
+    if @booking.save
+      redirect_to booking_path(@booking), notice: "You have submitted your booking request!."
     else
       render :new, status: :unprocessable_entity
     end
@@ -56,6 +61,27 @@ class BookingsController < ApplicationController
     authorize @booking
   end
 
+  def cancel
+    authorize @booking
+
+    @booking.cancelled_by_guest!
+    render json: { message: "Cancelled by guest successful" }, status: :ok
+  end
+
+  def host_cancel
+    authorize @booking
+
+    @booking.cancelled_by_host!
+    render json: { message: "Cancelled by host successful" }, status: :ok
+  end
+
+  def host_accept
+    authorize @booking
+
+    @booking.accepted_by_host!
+    render json: { message: "Accepted by host successful" }, status: :ok
+  end
+
   private
 
   def set_booking
@@ -67,7 +93,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :additional_requests, :guest_count, :payment_amount)
+    params.require(:booking).permit(:start_date, :end_date, :additional_requests, :guest_count, :listing_id)
   end
 
   def calculate_total_nights_amount

@@ -5,14 +5,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require "open-uri"
 
 puts "Cleaning Database"
 
 Booking.destroy_all
 Listing.destroy_all
 User.destroy_all
-
-
 
 puts "Creating 3 Faker users (userX@gmail.com) (PW:Abc123!!)"
 3.times do |i|
@@ -54,20 +53,31 @@ hotels.each do |hotel, address|
   house_rules = Faker::Lorem.paragraph(sentence_count: 2)
   listing = Listing.new(title: title, description: description, country: country, address: address, price_per_night: price_per_night, bedroom_count: bedroom_count, bathroom_count: bathroom_count, bed_count: bed_count, guest_count: guest_count, house_rules: house_rules, cleaning_fee: cleaning_fee, service_fee: service_fee)
   listing.host = User.all.sample
+  file = URI.open("https://res.cloudinary.com/dlnilayvg/image/upload/v1660383156/dzrfm5xcujthcwy8u64f.jpg")
+  listing.images.attach(io: file, filename: "room_interior.jpg", content_type: "image/jpg")
+  listing.save!
+  file2 = URI.open("https://res.cloudinary.com/dlnilayvg/image/upload/v1660567964/uduitc89itibbs2dk6ie.jpg")
+  listing.images.attach(io: file2, filename: "bathroom.jpg", content_type: "image/jpg")
   listing.save!
 end
 
 puts "Creating Bookings"
 
-10.times do
-  start_date = Faker::Date.between(from: Date.today - 6.month, to: Date.today + 6.month)
+15.times do
+  start_date = Faker::Date.between(from: Date.today - 1.month, to: Date.today + 6.month)
   end_date = start_date + rand(1..5)
   additional_requests = Faker::Lorem.paragraph(sentence_count: 2)
   guest_count = rand(1..8)
   booking = Booking.new(start_date: start_date, end_date: end_date, additional_requests: additional_requests, guest_count: guest_count)
-  booking.status = :accepted_by_host if end_date < Date.today
-  booking.guest = User.all.sample
+  if end_date < Date.today
+    if end_date.strftime('%d').to_i.even?
+      booking.status = :accepted_by_host
+    else
+      booking.status = :pending_host_confirmation
+    end
+  end
   booking.listing = Listing.all.sample
+  booking.guest = User.all.excluding(booking.listing.host).sample
   booking.payment_amount = (end_date - start_date).to_i * booking.listing.price_per_night
   booking.save!
 end

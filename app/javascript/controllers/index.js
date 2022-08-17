@@ -9,3 +9,12 @@ application.register("hello", HelloController)
 
 import MapController from "./map_controller"
 application.register("map", MapController)
+
+import BookingController from "./booking_controller"
+application.register("booking", BookingController)
+
+import ListingController from "./listing_controller"
+application.register("listing", ListingController)
+
+import MyListingsController from "./my_listings_controller"
+application.register("my_listings", MyListingsController)
