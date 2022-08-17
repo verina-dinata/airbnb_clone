@@ -25,4 +25,12 @@ class BookingPolicy < ApplicationPolicy
   def cancel?
     record.pending_host_confirmation?
   end
+
+  def host_cancel?
+    cancel?
+  end
+
+  def host_accept?
+    cancel?
+  end
 end
