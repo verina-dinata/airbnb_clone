@@ -20,7 +20,7 @@ class ListingsController < ApplicationController
   def show
     authorize @listing
     @booking = Booking.new
-    @markers = [
+    @marker = [
       {
         lat: @listing.latitude,
         lng: @listing.longitude
