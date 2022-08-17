@@ -64,7 +64,7 @@ end
 puts "Creating Bookings"
 
 15.times do
-  start_date = Faker::Date.between(from: Date.today - 6.month, to: Date.today + 6.month)
+  start_date = Faker::Date.between(from: Date.today - 1.month, to: Date.today + 6.month)
   end_date = start_date + rand(1..5)
   additional_requests = Faker::Lorem.paragraph(sentence_count: 2)
   guest_count = rand(1..8)
