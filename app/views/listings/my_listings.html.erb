@@ -18,12 +18,12 @@
         <tr>
           <th scope="row"><%= i + 1 %></th>
           <td><%= booking.listing.title %></td>
-          <td><%= booking.start_date %></td>
-          <td><%= booking.end_date %></td>
+          <td><%= booking.start_date.strftime("%d %h %Y") %></td>
+          <td><%= booking.end_date.strftime("%d %h %Y") %></td>
           <td><%= booking.guest.first_name %></td>
           <td scope="col" class="d-flex">
-            <button data-action="click->my_listings#updateBooking" href="<%= host_cancel_booking_path(booking) %>" class="color-txt">Decline</button>
             <button data-action="click->my_listings#updateBooking" href="<%= host_accept_booking_path(booking) %>" class="color-txt">Accept</button>
+            <button data-action="click->my_listings#updateBooking" href="<%= host_cancel_booking_path(booking) %>" class="color-txt">Decline</button>
           </td>
         </tr>
       <% end %>
@@ -31,30 +31,10 @@
     </table>
 
     <h5 class="mb-3">Upcoming bookings</h5>
-    <table class="table mb-5">
-      <thead>
-        <tr>
-          <th scope="col">No</th>
-          <th scope="col">Listing Name</th>
-          <th scope="col">Check-in</th>
-          <th scope="col">Checkout</th>
-          <th scope="col">Guest Name</th>
-          <th scope="col">Total Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @upcoming_bookings.each_with_index do |booking, i|  %>
-          <tr>
-            <th scope="row"><%= i + 1 %></th>
-            <td><%= booking.listing.title %></td>
-            <td><%= booking.start_date %></td>
-            <td><%= booking.end_date %></td>
-            <td><%= booking.guest.first_name %></td>
-            <td>$ <%= booking.payment_amount.to_i %>.00</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render "booking_table", bookings: @upcoming_bookings %>
+
+    <h5 class="mb-3">Past bookings</h5>
+    <%= render "booking_table", bookings: @past_bookings %>
   </div>
 
   <div class="row d-flex justify-content-between">
