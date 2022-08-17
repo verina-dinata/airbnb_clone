@@ -14,7 +14,7 @@ Listing.destroy_all
 User.destroy_all
 
 puts "Creating 3 Faker users (userX@gmail.com) (PW:Abc123!!)"
-3.times do |i|
+2.times do |i|
   user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -27,10 +27,10 @@ end
 puts "Creating Listings"
 
 hotels = {
-  # 'Goodwood Park Hotel' => '22 Scotts Rd, Singapore 228221',
-  # 'Park Regis Singapore' => '23 Merchant Rd, Singapore 058268',
-  # 'Carlton Hotel Singapore' => '76 Bras Basah Rd, Singapore 189558',
-  # 'Parkroyal Collection Marina Bay' => '6 Raffles Blvd, Singapore 039594',
+  'Goodwood Park Hotel' => '22 Scotts Rd, Singapore 228221',
+  'Park Regis Singapore' => '23 Merchant Rd, Singapore 058268',
+  'Carlton Hotel Singapore' => '76 Bras Basah Rd, Singapore 189558',
+  'Parkroyal Collection Marina Bay' => '6 Raffles Blvd, Singapore 039594',
   'Hotel Swissotel The Stamford' => '2 Stamford Rd, Singapore 178882',
   'Crowne Plaza Changi Airport' => '75 Airport Blvd., Singapore 819664',
   'Mandarin Oriental' => '5 Raffles Ave, Singapore 039797',
@@ -69,7 +69,13 @@ puts "Creating Bookings"
   additional_requests = Faker::Lorem.paragraph(sentence_count: 2)
   guest_count = rand(1..8)
   booking = Booking.new(start_date: start_date, end_date: end_date, additional_requests: additional_requests, guest_count: guest_count)
-  booking.status = :accepted_by_host if end_date < Date.today
+  if end_date < Date.today
+    if end_date.strftime('%d').to_i.even?
+      booking.status = :accepted_by_host
+    else
+      booking.status = :pending_host_confirmation
+    end
+  end
   booking.guest = User.all.sample
   booking.listing = Listing.all.sample
   booking.payment_amount = (end_date - start_date).to_i * booking.listing.price_per_night

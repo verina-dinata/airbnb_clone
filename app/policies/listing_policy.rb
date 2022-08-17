@@ -6,6 +6,14 @@ class ListingPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    true
+  end
+
+  def my_listings?
+    true
+  end
+
   def create?
     true
   end
