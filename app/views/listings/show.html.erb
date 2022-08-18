@@ -1,7 +1,14 @@
 
 <div class="container">
   <div class="mt-4">
-    <h3><%= @listing.title %></h3>
+    <div class="d-flex justify-content-between">
+
+      <h3><%= @listing.title %></h3>
+
+      <% if policy(@listing).edit? %>
+        <%= link_to "Edit this listing", edit_listing_path(@listing), class: "listing-link"%>
+      <% end %>
+    </div>
     <div class="row">
       <p><i class="fa-solid fa-star"></i> 4.97 · 82 reviews · <%= @listing.country %></p>
     </div>
@@ -32,7 +39,7 @@
           </p>
         </div>
         <div>
-          <%= image_tag("logo.png", class: "avatar-large") %>
+          <%= image_tag("logo.png", class: "avatar-large", style: "margin-right: 24px") %>
         </div>
       </div>
         <hr class="ms-2">
@@ -45,13 +52,21 @@
             <p><i class="fa-solid fa-kitchen-set listing-icon"></i>Kitchen</p>
             <p><i class="fa-solid fa-car listing-icon"></i>Free parking on premises</p>
             <p><i class="fa-solid fa-bath listing-icon"></i>Bath</p>
-            <p><i class="fa-thin fa-flower-daffodil listing-icon"></i>Garden</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Garden</p>
+            <p><i class="fa-regular fa-tv listing-icon"></i>TV</p>
+            <p class="listing-icon"> Mini-Fridge</p>
+            <p><i class="fa-regular fa-kit-medical listing-icon"></i>First-Aid Kit</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Cot</p>
           </div>
           <div class="d-flex flex-column my-3 w-50">
             <p><i class="fa-solid fa-wifi listing-icon"></i>WiFi</p>
             <p><i class="fa-solid fa-person-swimming listing-icon"></i>Private Pool</p>
             <p><i class="fa-duotone fa-pump-soap listing-icon"></i>Shampoo</p>
             <p><i class="fa-solid fa-snowflake listing-icon"></i>Air conditioning</p>
+            <p><i class="fa-regular fa-tv listing-icon"></i>Hangers</p>
+            <p><i class="fa-regular fa-mug-hot listing-icon"></i>Coffee</p>
+            <p><i class="fa-regular fa-fire-extinguisher listing-icon"></i>Fire Extinguisher</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Hot Water</p>
           </div>
         </div>
         <div class="my-4">
@@ -141,17 +156,17 @@
   <%# </strong></h5> %>
 
 
-  <% if policy(@listing).edit? %>
-    <%= link_to "Edit", edit_listing_path(@listing), class: "listing-link"%>
-  <% end %>
+  <%# <% if policy(@listing).edit? %>
+    <%# <%= link_to "Edit", edit_listing_path(@listing), class: "listing-link"%>
+  <%# <% end %>
 
-  <%= link_to "Back", listings_path, class: "listing-link" %>
+  <%# <%= link_to "Back", listings_path, class: "listing-link" %>
 
-  <% if policy(@listing).destroy? %>
-    <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "listing-link" %>
-  <% end %>
-  <hr>
-  <div class="my-4">
+  <%# <% if policy(@listing).destroy? %>
+    <%# <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "listing-link" %>
+  <%# <% end %>
+
+  <div>
     <h5><strong>Where you'll be</strong></h5>
     <div class="listing-map"
       data-controller="map"
