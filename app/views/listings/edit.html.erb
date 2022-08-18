@@ -1,4 +1,12 @@
-<div class="container mt-4">
-  <%= render "form" %>
-  <br>
+<div class="container mt-4 w-800px">
+  <div class="row">
+    <div class="d-flex justify-content-between">
+      <h1 class="mb-3">Edit your listing!</h1>
+      <div class="p-0 mt-3">
+        <%= link_to "Back to listings", my_listings_path , class: "hollow-btn" %>
+      </div>
+    </div>
+    <%= render "form", listing: @listing %>
+    <br>
+  </div>
 </div>

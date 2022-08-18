@@ -34,16 +34,16 @@ class ListingsController < ApplicationController
   end
 
   def create
-
     @listing = Listing.new(listing_params)
 
     @listing.host = current_user
-    raise
     authorize @listing
+
+    debugger
     if @listing.save
       redirect_to @listing, notice: "Listing was successfully created."
     else
-      render :new, status: :unprocessable_entity
+      render 'new', status: :unprocessable_entity
     end
   end
 

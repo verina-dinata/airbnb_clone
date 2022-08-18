@@ -128,8 +128,7 @@
               </span>
             </p>
           </div>
-
-          <button type="submit" class="btn submit-btn p-1" href="<%= new_booking_path %>" data-action="click->listing#reserveBooking">Reserve</button>
+          <button type="submit" class="btn submit-btn p-1" href="<%= new_booking_path %>" data-action="click->listing#reserveBooking" <%= "disabled" if @listing.host == current_user %>>Reserve</button>
 
         </form>
       </div>
