@@ -1,6 +1,11 @@
 <div class="container">
   <div data-controller="my_listings">
-    <h1 class="mb-3">Your listings' bookings</h1>
+    <div class="d-flex justify-content-between">
+      <h1 class="my-3">Your listings' bookings</h1>
+      <div class="py-4">
+        <%= link_to "Create a new listing", new_listing_path, class: "hollow-btn" %>
+      </div>
+    </div>
     <h5 class="mb-3">Pending confirmation</h5>
     <table class="table mb-5">
     <thead>
