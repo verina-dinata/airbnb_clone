@@ -34,8 +34,11 @@ class ListingsController < ApplicationController
   end
 
   def create
+
     @listing = Listing.new(listing_params)
+
     @listing.host = current_user
+    raise
     authorize @listing
     if @listing.save
       redirect_to @listing, notice: "Listing was successfully created."
@@ -71,6 +74,6 @@ class ListingsController < ApplicationController
 
   def listing_params
     params.require(:listing).permit(:title, :description, :address, :country, :price_per_night, :bedroom_count,
-                                    :bathroom_count, :bed_count, :guest_count, :house_rules, images: [])
+                                    :bathroom_count, :bed_count, :guest_count, :house_rules, :service_fee, :cleaning_fee, :images)
   end
 end
