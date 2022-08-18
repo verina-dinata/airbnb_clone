@@ -5,4 +5,10 @@
 .listing-link{
   text-decoration: none;
   margin-right: 25px;
+  font-size: large;
+  color: grey;
+
+  &:hover{
+    color: rgb(206, 204, 204);
+  }
 }
