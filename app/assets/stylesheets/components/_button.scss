@@ -19,12 +19,16 @@
   border-radius: 4px;
   background: $gray;
   transition: background 0.3s ease;
+  font-weight: bolder;
+  font-family: ("Nunito", "Helvetica", "sans-serif");
+  font-size: 20px;
 }
 
 .btn-flat:hover {
-  background: #4D04C4;
+  background:#cdcdce;
   color: white;
 }
+
 
 .btn-gradient {
   color: white;
@@ -38,8 +42,7 @@
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(#147EFF, #0F67DA);
-  color: white;
+  background: linear-gradient rgb(255, 49, 87)
 }
 .booking-btn {
   border: 1px solid rgb(255, 49, 87);
