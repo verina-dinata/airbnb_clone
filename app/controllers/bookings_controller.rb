@@ -40,6 +40,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     authorize @booking
     @booking.guest = current_user
+    @listing = @booking.listing
 
     if @booking.save
       redirect_to booking_path(@booking), notice: "You have submitted your booking request!."
