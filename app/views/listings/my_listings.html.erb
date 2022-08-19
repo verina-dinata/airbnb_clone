@@ -46,6 +46,11 @@
       <h5 class="mb-3">Past bookings</h5>
       <%= render "booking_table", bookings: @past_bookings %>
     </div>
+
+    <div class="<%= "d-none" if @cancelled_bookings.empty? %>">
+      <h5 class="mb-3">Declined bookings</h5>
+      <%= render "booking_table", bookings: @cancelled_bookings %>
+    </div>
   </div>
 
   <div>
