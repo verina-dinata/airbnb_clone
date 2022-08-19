@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="my-4">Trip</h1>
-  <h3 class="my-4 py-2 <%= "d-none" if @upcoming_bookings.empty? %>">Upcoming Trips</h3>
+<h3 class="my-4 py-2 <%= "d-none" if @upcoming_bookings.empty? %>">Upcoming Trips</h3>
   <%= render "card", bookings: @upcoming_bookings %>
 
   <h3 class="my-4 py-2 <%= "d-none" if @past_bookings.empty? %>">Where you've been</h3>
