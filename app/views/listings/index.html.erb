@@ -19,7 +19,7 @@
             <div>
               <% unless listing.images.empty? %>
                 <% i = (0..(listing.images.size - 1)).to_a.sample %>
-                <%= cl_image_tag listing.images[i].key, class:"card-img-top img-box" %>
+                <%= cl_image_tag listing.images[i].key, height: "auto", width: "300px", class:"card-img-top img-box" %>
               <% end %>
             </div>
           <% end %>
