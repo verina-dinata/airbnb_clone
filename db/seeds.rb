@@ -42,8 +42,8 @@ hotels = {
 hotels.each do |hotel, address|
   title = hotel
   description = Faker::Lorem.paragraph(sentence_count: 3)
-  country = Faker::Address.country
-  price_per_night = rand(100..700)
+  country = ["Singapore, Malaysia, Thailand, Japan, Korea, Singapore, Australia"].sample
+  price_per_night = rand(100..500)
   bedroom_count = rand(1..5)
   bathroom_count = rand(1..5)
   guest_count = rand(1..8)
@@ -55,9 +55,10 @@ hotels.each do |hotel, address|
   listing.host = User.all.sample
   file = URI.open("https://res.cloudinary.com/dlnilayvg/image/upload/v1660383156/dzrfm5xcujthcwy8u64f.jpg")
   listing.images.attach(io: file, filename: "room_interior.jpg", content_type: "image/jpg")
-  listing.save!
   file2 = URI.open("https://res.cloudinary.com/dlnilayvg/image/upload/v1660567964/uduitc89itibbs2dk6ie.jpg")
   listing.images.attach(io: file2, filename: "bathroom.jpg", content_type: "image/jpg")
+  file3 = URI.open("https://www.thespruce.com/thmb/9zdyLzPobCbaJrCfue4JR-xe6Ps=/2075x1167/smart/filters:no_upscale()/living-room-dos-and-donts-2213467-hero-da82a4643bc84d669a0a34f64e60beb1.jpg")
+  listing.images.attach(io: file3, filename: "living_room.jpg", content_type: "image/jpg")
   listing.save!
 end
 
