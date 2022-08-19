@@ -1,6 +1,6 @@
 
 <div class="container">
-  <div class="mt-4">
+  <div class="my-4">
     <div class="d-flex justify-content-between mx-2">
       <h3><%= @listing.title %></h3>
       <% if policy(@listing).edit? %>
@@ -13,7 +13,7 @@
       <p class="mx-2"<%= "hidden" if @listing.bookings.empty? %>><i class="fa-solid fa-star"></i> 4.97 · 82 reviews · <%= @listing.country %></p>
     </div>
   </div>
-  
+
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -23,7 +23,7 @@
     <div class="carousel-inner">
       <% @listing.images.each.with_index do |photo, i| %>
         <div class="carousel-item <%= "active" if i == 0 %>">
-          <%= cl_image_tag @listing.images[i].key, height: "auto", width: "100%", class: "d-block" %>
+          <%= cl_image_tag @listing.images[i].key, height: "auto", width: "100%", class: "d-block img-box-large" %>
         </div>
       <% end %>
 
@@ -37,11 +37,8 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <%# <h1><%= @listing.title %>
-  <%# </h1> %>
-  <%# <%= image_tag("logo.png", width: "400px", height: "400px") %>
 
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-lg-7 col-md-8 col-sm-12 mt-3 pe-5" style= "width: 57%">
       <div class="my-3 d-flex align-items-center">
         <div class="ml-custom flex-grow-1 ms-2">
@@ -57,8 +54,14 @@
           <%= image_tag("logo.png", class: "avatar-large", style: "margin-right: 24px") %>
         </div>
       </div>
-        <hr class="ms-2">
+      <hr class="ms-2">
+
       <div class="my-3 p-2">
+        <div>
+          <h5><strong>Description</strong></h5>
+        </div>
+        <p><%= @listing.description %></p>
+        <hr>
         <div>
           <h5><strong>What this place offers</strong></h5>
         </div>
