@@ -10,7 +10,12 @@
       <% end %>
     </div>
     <div class="row">
-      <p class="mx-2"<%= "hidden" if @listing.bookings.empty? %>><i class="fa-solid fa-star"></i> 4.97 · 82 reviews · <%= @listing.country %></p>
+      <p class="mx-2">
+        <span class=<%= "d-none" if @listing.bookings.empty? %>>
+          <i class="fa-solid fa-star"></i> 4.97 · 82 reviews ·
+        </span>
+        <%= @listing.country %>
+      </p>
     </div>
   </div>
 
