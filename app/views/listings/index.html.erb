@@ -1,7 +1,4 @@
-
-
 <br>
-
 <div class="container">
   <div>
     <a class="btn btn-flat" href="#">Islands</a>
@@ -9,20 +6,8 @@
     <a class="btn btn-flat" href="#">Tropical</a>
     <a class="btn btn-flat" href="#">Luxury</a>
     <a class="btn btn-flat" href="#">Castles</a>
-    <a class="btn btn-gradient" href="#">filters</a>
   </div>
-
-  <div class="cards">
-    <% @listings.each do |listing| %>
-      <div class="listing-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
-        <%= link_to listing.title, listing_path(listing), class: "link" %>
-        <p class="mb-0"><%= listing.country %></p>
-        <p>$<%= listing.price_per_night%> SGD night</p>
-       </div>
-  </div>
-
   <br>
-
 <div class="row">
   <div class="cards">
     <% @listings.each do |listing| %>
@@ -39,7 +24,6 @@
     <% end %>
   </div>
 </div>
-
 <div class="footer">
   <div class="footer-links">
     <a href="#"><i class="fab fa-github"></i></a>
@@ -48,9 +32,7 @@
     <a href="#"><i class="fab fa-twitter"></i></a>
     <a href="#"><i class="fab fa-linkedin"></i></a>
   </div>
-
   <div class="footer-copyright">
     This footer is made with <i class="fas fa-heart"></i> at Le Wagon
-  </div>
   </div>
 </div>

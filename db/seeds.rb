@@ -27,7 +27,7 @@ end
 puts "Creating Listings"
 
 hotels = {
-  'Goodwood Park Hotel' => '22 Scotts Rd, Singapore 228221',
+  'Goodwood Park Hotel Singapore' => '22 Scotts Rd, Singapore 228221',
   'Park Regis Singapore' => '23 Merchant Rd, Singapore 058268',
   'Carlton Hotel Singapore' => '76 Bras Basah Rd, Singapore 189558',
   'Parkroyal Collection Marina Bay' => '6 Raffles Blvd, Singapore 039594',
