@@ -137,12 +137,17 @@
 
 .card-font {
   font-family:"Nunito", "Helvetica", "sans-serif" ;
-  background-color: rgb(255, 90, 95);
-  font-weight: bolder;
-  color: white;
+  color: black;
   width: 20rem;
 }
 
 .listing-icon {
   margin-right: 8px;
+}
+
+
+.img-box {
+  object-fit: cover;
+  width: 230px;
+  height: 230px;
 }

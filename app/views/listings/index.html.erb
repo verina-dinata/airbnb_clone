@@ -10,33 +10,25 @@
 
   <br>
 
-<div class="row">
-  <div class="cards">
+  <div class="row">
     <% @listings.each do |listing| %>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="card" style="width: 20rem;">
-          <img src="https://www.savoirflair.com/wp-content/uploads/2017/11/Indonesia-AirBnB-1024x683.jpg" class="card-img-top" alt="...">
-        </div>
-        <div class="card-body card-font">
-          <%= link_to listing.title, listing_path(listing), class: "link" %>
-          <p class="mb-0"><%= listing.country %></p>
-          <p>$<%= listing.price_per_night%> SGD night</p>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 my-4">
+        <div class="card border-0">
+          <%= link_to listing_path(listing), class: "link" do %>
+            <div>
+              <img class="card-img-top img-box" src="https://www.savoirflair.com/wp-content/uploads/2017/11/Indonesia-AirBnB-1024x683.jpg" alt="Card image cap">
+            </div>
+          <% end %>
+          <div class="card-body">
+            <div style="height: 4em">
+              <h6 class="card-title fw-bold mb-3"><%= listing.title %></h6>
+            </div>
+            <div class=" justify-content-start">
+              <p class="small"><strong>$<%= listing.price_per_night.to_i%></strong> SGD night</p>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
-  </div>
-</div>
-
-<div class="footer">
-  <div class="footer-links">
-    <a href="#"><i class="fab fa-github"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-  </div>
-
-  <div class="footer-copyright">
-    Airbnb <i class="fas fa-heart"></i> Clone
   </div>
 </div>
