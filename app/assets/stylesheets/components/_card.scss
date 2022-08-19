@@ -97,21 +97,23 @@
 
 }
 .link {
-  color: aliceblue;
-  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  font-size: 1.3em;
 }
 
 .card-info-bold {
   margin-bottom: 0;
   font-weight: bold;
   font-size: 16px;
+  line-height: 1em;
 }
 
 .card-info-light p {
   margin-bottom: 0;
-  font-size: smaller;
-  font-weight: lighter;
-  color: rgb(140, 140, 140)
+  font-size: 14px;
+  font-weight: light;
+  color: rgb(115, 115, 115)
 }
 
 .trip {
@@ -119,13 +121,15 @@
 }
 
 .summary-card {
-  width: 80%;
+  width: 90%;
   height: 100%;
   border: 1px solid rgb(205, 205, 205);
-  box-shadow: 2px 2px 10px rgb(140, 140, 140);
+  box-shadow: 2px 2px 10px rgb(177, 177, 177);
+  border-radius: 10px;
 }
 
 .summary-card-picture {
+  border-radius: 10px 0;
   width: 100%;
   background-position: center;
   background-size: cover;
@@ -137,4 +141,7 @@
   font-weight: bolder;
   color: white;
   width: 20rem;
+
+.listing-icon {
+  margin-right: 8px;
 }

@@ -1,54 +1,12 @@
-<div class="container mt-4">
-  <%= simple_form_for(@listing) do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-    <div class="form-inputs">
-      <%= f.input :title %>
+<div class="container mt-4 w-800px">
+  <div class="row">
+    <div class="d-flex justify-content-between">
+      <h1 class="mb-3">Create your listing!</h1>
+      <div class="p-0 mt-3">
+        <%= link_to "Back to listings", my_listings_path , class: "hollow-btn" %>
+      </div>
     </div>
-
-    <div class="form-inputs">
-      <%= f.input :description %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :address %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :country %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :price_per_night %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :bedroom_count %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :bathroom_count %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :bed_count %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :house_rules %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :guest_count %>
-    </div>
-
-    <div class="form-actions btn btn-danger">
-      <%= f.button :submit %>
-    </div>
-  <% end %>
-  <br>
-  <div>
-    <%= link_to "Back to listings", listings_path , style: "text-decoration:none"%>
+    <%= render "form", listing: @listing %>
+    <br>
   </div>
 </div>

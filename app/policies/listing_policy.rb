@@ -6,6 +6,14 @@ class ListingPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    true
+  end
+
+  def my_listings?
+    true
+  end
+
   def create?
     true
   end
@@ -19,6 +27,10 @@ class ListingPolicy < ApplicationPolicy
   end
 
   def update?
+    record.host == user
+  end
+
+  def destroy?
     record.host == user
   end
 end

@@ -1,17 +1,189 @@
+
 <div class="container">
-  <div class="mb-2">
-    <%= image_tag("logo.png", width: "400px", height: "400px") %>
+  <div class="mt-4">
+    <div class="d-flex justify-content-between mx-2">
+      <h3><%= @listing.title %></h3>
+      <% if policy(@listing).edit? %>
+        <div class="">
+          <%= link_to "Edit this listing", edit_listing_path(@listing), class: "hollow-btn" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <p class="mx-2"<%= "hidden" if @listing.bookings.empty? %>><i class="fa-solid fa-star"></i> 4.97 · 82 reviews · <%= @listing.country %></p>
+    </div>
   </div>
-  <h5><strong><%= @listing.title%> hosted by <%= @listing.host.first_name %></strong></h5>
-  <p>
-    <%= @listing.guest_count %> guests ·
-    <%= @listing.bedroom_count %> bedrooms ·
-    <%= @listing.bed_count%> bed ·
-    <%= @listing.bathroom_count%> bathrooms
-  </p>
-  <% if policy(@listing).edit? %>
-    <%= link_to "Edit this listing", edit_listing_path(@listing) %>
-  <% end %>
-  <%= link_to "Back", listings_path %>
-  <%# <%= link_to "Edit", edit_listing_path(@listing) %>
+  <div class="d-flex flex-row justify-content-between">
+    <div class="col-lg-6 col-md-6 col-sm-12 p-2">
+      <%= image_tag 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGJlZHJvb218ZW58MHx8MHx8&w=1000&q=80', width: "100%", height: "500px", style: "border-radius: 16px"%>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 p-2">
+      <%= image_tag 'https://images.unsplash.com/photo-1614622352876-4a90d2515f0d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2970&q=80', width: "100%", height: "500px", style: "border-radius: 16px"%>
+    </div>
+  </div>
+
+
+  <%# <h1><%= @listing.title %>
+  <%# </h1> %>
+  <%# <%= image_tag("logo.png", width: "400px", height: "400px") %>
+  <%# <% @listing.images.each do |image| %>
+  <%# <%= cl_image_tag image.key, height: 300, width: 400, crop: :fill %>
+  <%# <%= image_tag 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGJlZHJvb218ZW58MHx8MHx8&w=1000&q=80', width: "100%" %>
+  <%# <% end %>
+  <%# style= "width: 1285px" %>
+
+  <div class="row">
+    <div class="col-lg-7 col-md-8 col-sm-12 mt-3 pe-5" style= "width: 57%">
+      <div class="my-3 d-flex align-items-center">
+        <div class="ml-custom flex-grow-1 ms-2">
+          <h5 class="my-0"><strong>Entire unit hosted by <%= @listing.host.first_name %></strong></h5>
+          <p>
+            <%= @listing.guest_count %> guests ·
+            <%= @listing.bedroom_count %> bedrooms ·
+            <%= @listing.bed_count%> bed ·
+            <%= @listing.bathroom_count%> bathrooms
+          </p>
+        </div>
+        <div>
+          <%= image_tag("logo.png", class: "avatar-large", style: "margin-right: 24px") %>
+        </div>
+      </div>
+        <hr class="ms-2">
+      <div class="my-3 p-2">
+        <div>
+          <h5><strong>What this place offers</strong></h5>
+        </div>
+        <div class="d-flex flex-row w-100">
+          <div class="d-flex flex-column my-3 w-50">
+            <p><i class="fa-solid fa-kitchen-set listing-icon"></i>Kitchen</p>
+            <p><i class="fa-solid fa-car listing-icon"></i>Free parking on premises</p>
+            <p><i class="fa-solid fa-bath listing-icon"></i>Bath</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Garden</p>
+            <p><i class="fa-regular fa-tv listing-icon"></i>TV</p>
+            <p class="listing-icon"> Mini-Fridge</p>
+            <p><i class="fa-regular fa-kit-medical listing-icon"></i>First-Aid Kit</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Cot</p>
+          </div>
+          <div class="d-flex flex-column my-3 w-50">
+            <p><i class="fa-solid fa-wifi listing-icon"></i>WiFi</p>
+            <p><i class="fa-solid fa-person-swimming listing-icon"></i>Private Pool</p>
+            <p><i class="fa-duotone fa-pump-soap listing-icon"></i>Shampoo</p>
+            <p><i class="fa-solid fa-snowflake listing-icon"></i>Air conditioning</p>
+            <p><i class="fa-regular fa-tv listing-icon"></i>Hangers</p>
+            <p><i class="fa-regular fa-mug-hot listing-icon"></i>Coffee</p>
+            <p><i class="fa-regular fa-fire-extinguisher listing-icon"></i>Fire Extinguisher</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Hot Water</p>
+          </div>
+        </div>
+        <div class="my-4">
+        <button type="button" class="listing-button p-2">Show all 20 amenities</button>
+        </div>
+        <hr>
+      </div>
+    </div>
+
+    <div class="col-lg-5 col-md-4 col-sm-12 summary-card p-4 my-4" data-controller="listing">
+      <div class="">
+        <div class="d-flex flex-row">
+          <h5 class="fw-bold">$<%= @listing.price_per_night.to_i %></h5>
+          <p class="">/night</p>
+        </div>
+
+        <div class="d-flex">
+          <i class="fa-solid fa-star"></i>
+          <p class="mx-1"><strong>4.63</strong> (82 reviews)</p>
+        </div>
+
+        <form>
+          <div class="row">
+            <div class="col">
+              <label for="formGroupExampleInput">Checkin</label>
+              <input id="startDate" class="form-control" data-listing-target="startDate" type="date" value="<%= Date.today.strftime("%Y-%m-%d") %>" data-action="change->listing#startDateChange" min="<%= Date.today %>"/>
+            </div>
+
+            <div class="col">
+              <label for="formGroupExampleInput">Checkout</label>
+              <input id="endDate" class="form-control" data-listing-target="endDate" type="date" value="<%= (Date.today + 1).strftime("%Y-%m-%d") %>" data-action="change->listing#endDateChange" min="<%= Date.today + 1.day %>" />
+            </div>
+          </div>
+
+          <label for="formGroupExampleInput">Guests</label>
+          <br>
+          <select class="form-select" id="inlineFormCustomSelectPref" data-listing-target="guestCount">
+            <option selected>1</option>
+            <% (@listing.guest_count + 1).times do |i| %>
+              <% next if i < 2 %>
+              <option value="<%= i %>"><%= i %></option>
+            <% end %>
+          </select>
+
+          <h6 class="my-4 fw-custom">Payment amount</h6>
+          <div class="d-flex justify-content-between">
+            <p>$<%= @listing.price_per_night.to_i %> x
+              <span data-listing-target="nightCount">
+                1
+              </span>
+              night(s)
+            </p>
+            <p>$<span data-listing-target="subTotal"><%= total_amount = @listing.price_per_night.to_i %></span>
+            </p>
+          </div>
+
+          <div class="d-flex justify-content-between">
+          <p>Cleaning Fee</p>
+          <p>$<%= @listing.cleaning_fee %></p>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <p>Service Fee</p>
+            <p>$<%= @listing.service_fee %></p>
+          </div>
+
+          <hr>
+
+          <div class="d-flex justify-content-between mb-3">
+            <p class="fw-custom">Total</p>
+            <p>$
+              <span data-listing-target="totalAmount">
+                <%= @listing.price_per_night.to_i %>
+              </span>
+            </p>
+          </div>
+          <button type="submit" class="btn submit-btn p-1" href="<%= new_booking_path %>" data-action="click->listing#reserveBooking" <%= "disabled" if @listing.host == current_user %>>Reserve</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <%# <h5><strong><%= @listing.title %>
+  <%# hosted by <%= @listing.host.first_name %>
+  <%# </strong></h5> %>
+
+
+  <%# <% if policy(@listing).edit? %>
+    <%# <%= link_to "Edit", edit_listing_path(@listing), class: "listing-link"%>
+  <%# <% end %>
+
+  <%# <%= link_to "Back", listings_path, class: "listing-link" %>
+
+  <%# <% if policy(@listing).destroy? %>
+    <%# <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "listing-link" %>
+  <%# <% end %>
+
+  <div>
+    <h5><strong>Where you'll be</strong></h5>
+    <div class="listing-map mb-5"
+      data-controller="map"
+      data-map-markers-value="<%= @marker.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+  </div>
 </div>
+
+  <script>
+    const pricePerNight = <%= @listing.price_per_night %>
+    const cleaningFee = <%= @listing.cleaning_fee %>
+    const serviceFee = <%= @listing.service_fee %>
+    const listingId = <%= @listing.id %>
+  </script>

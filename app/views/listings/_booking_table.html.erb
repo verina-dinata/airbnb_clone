@@ -1,0 +1,24 @@
+<table class="table mb-5">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Listing Name</th>
+      <th scope="col">Check-in</th>
+      <th scope="col">Checkout</th>
+      <th scope="col">Guest Name</th>
+      <th scope="col">Total Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% bookings.each_with_index do |booking, i|  %>
+      <tr>
+        <th scope="row"><%= i + 1 %></th>
+        <td><%= booking.listing.title %></td>
+        <td><%= booking.start_date.strftime("%d %h %Y") %></td>
+        <td><%= booking.end_date.strftime("%d %h %Y") %></td>
+        <td><%= booking.guest.first_name %></td>
+        <td>$ <%= booking.payment_amount.to_i %>.00</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

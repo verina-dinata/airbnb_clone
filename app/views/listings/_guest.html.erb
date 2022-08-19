@@ -1,0 +1,5 @@
+<select class="form-select" id="inlineFormCustomSelectPref">
+  <% 15.times do |i| %>
+    <option <%= "selected" if i ==0 %> value="<%= i + 1 %>"><%= i + 1 %></option>
+  <% end %>
+</select>
