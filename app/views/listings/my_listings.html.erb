@@ -52,15 +52,6 @@
     <h1>Your listings</h1>
     <div class="row">
       <% @listings.each do |listing| %>
-        <% picture = ["http://iconinterior.com.sg/wp-content/uploads/2019/05/Icon_27831_Final.jpg",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBIs77epe58QsN5JxxiNA0HdbjD_3SeS9T6g&usqp=CAU",
-                    "https://www.design4space.com.sg/wp-content/uploads/2022/04/DSC09736-HDR-1536x1024-1.webp",
-                    "https://www.decoraid.com/wp-content/uploads/2021/04/Interior-of-modern-hallway-with-mirror-scaled.jpeg",
-                    "https://www.build-review.com/wp-content/uploads/2020/09/interior-design.jpg",
-                    "https://media.istockphoto.com/photos/elegant-and-vintage-apartment-interior-with-classic-wooden-furniture-picture-id1130536041?k=20&m=1130536041&s=612x612&w=0&h=UB2U4XFqZZhGlym-Ebh3JLboi6ALBhGB_AGdl3lk1g8=",
-                    "https://img.freepik.com/premium-photo/modern-living-room-interior-design_221619-79.jpg?w=2000",
-                    "https://s3-ap-southeast-1.amazonaws.com/atap-main/gallery-full/7c4a8bdd-5a45-44f1-bc0b-666ff60c1db4/modern-apartment-design.jpg",
-                    "https://image.archify.com/blog/l/mjkway45.jpg"].sample %>
         <div class="card mx-2 my-3 col-lg-4 col-md-6 col-sm-12 border-0" style="width: 18rem;">
           <%= link_to listing_path(listing), class: "link" do %>
             <% unless listing.images.empty? %>

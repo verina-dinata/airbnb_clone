@@ -11,8 +11,9 @@
     </div>
     <div class="row">
       <p class="mx-2">
-        <span class=<%= "d-none" if @listing.bookings.empty? %>>
-          <i class="fa-solid fa-star"></i> 4.97 · 82 reviews ·
+        <span class="<%= "d-none" if @listing.bookings.empty? %>">
+          <i class="fa-solid fa-star"></i>
+          4.97 · 82 reviews ·
         </span>
         <%= @listing.country %>
       </p>
@@ -107,7 +108,7 @@
         </div>
 
         <div class="d-flex">
-          <i class="fa-solid fa-star"<%= "hidden" if @listing.bookings.empty? %>>></i>
+          <i class="fa-solid fa-star"<%= "hidden" if @listing.bookings.empty? %>></i>
           <p class="mx-1"<%= "hidden" if @listing.bookings.empty? %>><strong>4.63</strong> (82 reviews)</p>
         </div>
 

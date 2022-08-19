@@ -36,7 +36,10 @@
           </div>
         </div>
         <div>
-          <%= image_tag 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80', width: "100%" %>
+          <% unless @booking.listing.images.empty? %>
+            <% i = (0..(@booking.listing.images.size - 1)).to_a.sample %>
+            <%= cl_image_tag @booking.listing.images[i].key, width: "100%" %>
+          <% end %>
         </div>
         <h5 class="my-4 fw-custom"><%= @booking.listing.title %></h5>
         <% if @booking.accepted_by_host? %>
