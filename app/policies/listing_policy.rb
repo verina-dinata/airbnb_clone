@@ -31,6 +31,6 @@ class ListingPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.host == user
+    record.host == user && record.bookings.empty?
   end
 end
