@@ -12,6 +12,7 @@ class ListingsController < ApplicationController
     bookings = @listings.map{ |l| l.bookings }.flatten.sort_by{ |b| b.start_date}
     @pending_bookings = bookings.select { |b| b.pending_host_confirmation? }
     @upcoming_bookings = bookings.select { |b| b.accepted_by_host? && b.start_date > Date.today }
+    @past_bookings = bookings.select { |b| b.accepted_by_host? && b.end_date < Date.today}
 
     # render 'index'
   end
@@ -19,7 +20,7 @@ class ListingsController < ApplicationController
   def show
     authorize @listing
     @booking = Booking.new
-    @markers = [
+    @marker = [
       {
         lat: @listing.latitude,
         lng: @listing.longitude
@@ -34,12 +35,15 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
+
     @listing.host = current_user
     authorize @listing
+
+    debugger
     if @listing.save
       redirect_to @listing, notice: "Listing was successfully created."
     else
-      render :new, status: :unprocessable_entity
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -70,6 +74,6 @@ class ListingsController < ApplicationController
 
   def listing_params
     params.require(:listing).permit(:title, :description, :address, :country, :price_per_night, :bedroom_count,
-                                    :bathroom_count, :bed_count, :guest_count, :house_rules, images: [])
+                                    :bathroom_count, :bed_count, :guest_count, :house_rules, :service_fee, :cleaning_fee, :images)
   end
 end

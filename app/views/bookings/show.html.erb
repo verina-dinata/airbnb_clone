@@ -28,7 +28,7 @@
             </div>
             <div data-controller="booking">
               <% if @booking.accepted_by_host? && @booking.end_date < Date.today %>
-                <%= link_to "Rate this trip", '#', class: "booking-btn cancel flex-grow-3"%>
+                <%= link_to "Rate this trip", '#', class: "hollow-btn flex-grow-3"%>
               <% elsif @booking.pending_host_confirmation? %>
                 <%= link_to "Cancel this trip", cancel_booking_path(@booking), onclick: "return confirm('Are you sure?')", class: "hollow-btn flex-grow-3", "data-action" => "click->booking#cancelBooking"%>
               <% end %>

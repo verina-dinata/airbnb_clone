@@ -1,11 +1,19 @@
 
-<div class="container" style="width: 1000px">
+<div class="container">
   <div class="mt-4">
-    <h3><%= @listing.title %></h3>
+    <div class="d-flex justify-content-between mx-2">
+      <h3><%= @listing.title %></h3>
+      <% if policy(@listing).edit? %>
+        <div class="">
+          <%= link_to "Edit this listing", edit_listing_path(@listing), class: "hollow-btn" %>
+        </div>
+      <% end %>
+    </div>
     <div class="row">
-      <p><i class="fa-solid fa-star"></i> 4.97 · 82 reviews · <%= @listing.country %></p>
+      <p class="mx-2"<%= "hidden" if @listing.bookings.empty? %>><i class="fa-solid fa-star"></i> 4.97 · 82 reviews · <%= @listing.country %></p>
     </div>
   </div>
+  
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -34,9 +42,9 @@
   <%# <%= image_tag("logo.png", width: "400px", height: "400px") %>
 
   <div class="row">
-    <div class="col-lg-7 col-md-8 col-sm-12 p-0 mt-3">
+    <div class="col-lg-7 col-md-8 col-sm-12 mt-3 pe-5" style= "width: 57%">
       <div class="my-3 d-flex align-items-center">
-        <div class="flex-grow-1">
+        <div class="ml-custom flex-grow-1 ms-2">
           <h5 class="my-0"><strong>Entire unit hosted by <%= @listing.host.first_name %></strong></h5>
           <p>
             <%= @listing.guest_count %> guests ·
@@ -46,7 +54,7 @@
           </p>
         </div>
         <div>
-          <%= image_tag("logo.png", class: "avatar-large") %>
+          <%= image_tag("logo.png", class: "avatar-large", style: "margin-right: 24px") %>
         </div>
       </div>
         <hr class="ms-2">
@@ -54,24 +62,30 @@
         <div>
           <h5><strong>What this place offers</strong></h5>
         </div>
-        <div class="d-flex flex-row justify-content-between my-3">
-            <div><i class="fa-solid fa-kitchen-set"></i>Kitchen</div>
-            <div><i class="fa-solid fa-wifi"></i>WiFi</div>
-        </div>
-        <div class="d-flex flex-row justify-content-between my-3">
-            <div><i class="fa-solid fa-car"></i>Free parking on premises</div>
-            <div><i class="fa-solid fa-person-swimming"></i>Private Pool</div>
-        </div>
-        <div class="d-flex flex-row justify-content-between my-3">
-            <div><i class="fa-solid fa-bath"></i>Bath</div>
-            <div><i class="fa-duotone fa-pump-soap"></i>Shampoo</div>
-        </div>
-        <div class="d-flex flex-row justify-content-between my-3">
-            <div><i class="fa-thin fa-flower-daffodil"></i>Garden</div>
-            <div><i class="fa-solid fa-snowflake"></i>Air conditioning</div>
+        <div class="d-flex flex-row w-100">
+          <div class="d-flex flex-column my-3 w-50">
+            <p><i class="fa-solid fa-kitchen-set listing-icon"></i>Kitchen</p>
+            <p><i class="fa-solid fa-car listing-icon"></i>Free parking on premises</p>
+            <p><i class="fa-solid fa-bath listing-icon"></i>Bath</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Garden</p>
+            <p><i class="fa-regular fa-tv listing-icon"></i>TV</p>
+            <p class="listing-icon"> Mini-Fridge</p>
+            <p><i class="fa-regular fa-kit-medical listing-icon"></i>First-Aid Kit</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Cot</p>
+          </div>
+          <div class="d-flex flex-column my-3 w-50">
+            <p><i class="fa-solid fa-wifi listing-icon"></i>WiFi</p>
+            <p><i class="fa-solid fa-person-swimming listing-icon"></i>Private Pool</p>
+            <p><i class="fa-duotone fa-pump-soap listing-icon"></i>Shampoo</p>
+            <p><i class="fa-solid fa-snowflake listing-icon"></i>Air conditioning</p>
+            <p><i class="fa-regular fa-tv listing-icon"></i>Hangers</p>
+            <p><i class="fa-regular fa-mug-hot listing-icon"></i>Coffee</p>
+            <p><i class="fa-regular fa-fire-extinguisher listing-icon"></i>Fire Extinguisher</p>
+            <p><i class="fa-regular fa-seedling listing-icon"></i>Hot Water</p>
+          </div>
         </div>
         <div class="my-4">
-        <button type="button" class="p-2">Show all 20 amenities</button>
+        <button type="button" class="listing-button p-2">Show all 20 amenities</button>
         </div>
         <hr>
       </div>
@@ -144,8 +158,7 @@
               </span>
             </p>
           </div>
-
-          <button type="submit" class="btn submit-btn p-1" href="<%= new_booking_path %>" data-action="click->listing#reserveBooking">Reserve</button>
+          <button type="submit" class="btn submit-btn p-1" href="<%= new_booking_path %>" data-action="click->listing#reserveBooking" <%= "disabled" if @listing.host == current_user %>>Reserve</button>
 
         </form>
       </div>
@@ -157,27 +170,29 @@
   <%# </strong></h5> %>
 
 
-  <% if policy(@listing).edit? %>
-    <%= link_to "Edit", edit_listing_path(@listing) %>
-  <% end %>
+  <%# <% if policy(@listing).edit? %>
+    <%# <%= link_to "Edit", edit_listing_path(@listing), class: "listing-link"%>
+  <%# <% end %>
 
-  <%= link_to "Back", listings_path %>
+  <%# <%= link_to "Back", listings_path, class: "listing-link" %>
 
-  <% if policy(@listing).destroy? %>
-    <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  <% end %>
-  <hr>
-  <div class="my-4">
+  <%# <% if policy(@listing).destroy? %>
+    <%# <%= link_to "Delete", listing_path(@listing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "listing-link" %>
+  <%# <% end %>
+
+  <div>
     <h5><strong>Where you'll be</strong></h5>
+    <div class="listing-map mb-5"
+      data-controller="map"
+      data-map-markers-value="<%= @marker.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
   </div>
+</div>
 
-<%# ------ Do not remove ------ %>
   <script>
     const pricePerNight = <%= @listing.price_per_night %>
     const cleaningFee = <%= @listing.cleaning_fee %>
     const serviceFee = <%= @listing.service_fee %>
     const listingId = <%= @listing.id %>
   </script>
-<%# ------ Do not remove ------ %>
-
-</div>
