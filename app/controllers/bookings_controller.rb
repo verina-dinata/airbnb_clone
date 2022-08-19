@@ -25,11 +25,6 @@ class BookingsController < ApplicationController
 
   # http://localhost:3000/bookings/new?start_date=2022-10-10&end_date=2022-10-18&guest_count=5&listing_id=40
   def new
-
-    # TODO: make sure listing don't belong to the current user :D lol
-    # redirect with notice
-    # if listing.host == current_user
-
     @booking = Booking.new(
       start_date: params[:start_date],
       end_date: params[:end_date],
