@@ -15,7 +15,7 @@
             <option selected><%= @booking.guest_count%></option>
             <% (@listing.guest_count + 1).times do |i| %>
               <% next if i < 1 %>
-              <option value=" <%= i %>"><%= i %></option>
+              <option value="<%= i %>"><%= i %></option>
             <% end %>
           </select>
         </form>
