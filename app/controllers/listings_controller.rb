@@ -38,8 +38,6 @@ class ListingsController < ApplicationController
 
     @listing.host = current_user
     authorize @listing
-
-    debugger
     if @listing.save
       redirect_to @listing, notice: "Listing was successfully created."
     else
