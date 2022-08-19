@@ -1,10 +1,17 @@
 <div class="row">
   <% bookings.each do |booking| %>
-    <div class="col-lg-4 col-md-6 col-sm-12 pl-0">
+    <% picture = ["http://iconinterior.com.sg/wp-content/uploads/2019/05/Icon_27831_Final.jpg",
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBIs77epe58QsN5JxxiNA0HdbjD_3SeS9T6g&usqp=CAU",
+                  "https://www.design4space.com.sg/wp-content/uploads/2022/04/DSC09736-HDR-1536x1024-1.webp",
+                  "https://www.decoraid.com/wp-content/uploads/2021/04/Interior-of-modern-hallway-with-mirror-scaled.jpeg",
+                  "https://www.build-review.com/wp-content/uploads/2020/09/interior-design.jpg",
+                  "https://media.istockphoto.com/photos/elegant-and-vintage-apartment-interior-with-classic-wooden-furniture-picture-id1130536041?k=20&m=1130536041&s=612x612&w=0&h=UB2U4XFqZZhGlym-Ebh3JLboi6ALBhGB_AGdl3lk1g8=",
+                  "https://img.freepik.com/premium-photo/modern-living-room-interior-design_221619-79.jpg?w=2000"].sample %>
+    <div class="col-lg-4 col-md-6 col-sm-12 pl-0 mb-4">
       <%= link_to booking_path(booking), class: "link" do %>
-        <div class="trip-card d-flex">
-          <div classs="trip-card-image">
-            <%= image_tag("logo.png", width: "72px") %>
+        <div class=" d-flex">
+          <div classs="trip-card">
+            <%= image_tag(picture, class: "trip-card-image") %>
           </div>
           <div class="trip-card-info">
             <p class="card-info-bold"><%= booking.listing.country %></p>
