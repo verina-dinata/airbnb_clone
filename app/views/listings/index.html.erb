@@ -17,7 +17,10 @@
         <div class="card border-0">
           <%= link_to listing_path(listing), class: "link" do %>
             <div>
-              <img class="card-img-top img-box" src="https://www.savoirflair.com/wp-content/uploads/2017/11/Indonesia-AirBnB-1024x683.jpg" alt="Card image cap">
+              <% unless listing.images.empty? %>
+                <% i = (0..(listing.images.size - 1)).to_a.sample %>
+                <%= cl_image_tag listing.images[i].key, class:"card-img-top img-box" %>
+              <% end %>
             </div>
           <% end %>
           <div class="card-body">
