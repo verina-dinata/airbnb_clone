@@ -43,7 +43,7 @@
   <br>
   <div class="form-floating mb-4">
     <% valid_class = 'is-valid' if f.object.country.present? %>
-    <%= f.country_select :country, { priority_countries: ["SG", "USA"] }, { class: "form-select #{valid_class}" }, prompt: 'Select Country' %>
+    <%= f.country_select :country, { priority_countries: ["Singapore", "United States"] }, { class: "form-select #{valid_class}" }, prompt: 'Select Country' %>
     <%= f.label :country, 'Country' %>
   </div>
 
@@ -100,10 +100,15 @@
   </div>
 
   <br>
-  <div class="form-floating mb-3">
+  <div class="form-floating mb-4">
     <%= f.input_field :house_rules, as: :text, class: 'form-control', style: 'height:8em;', placeholder:"Tell us your story"  %>
     <%= f.label :house_rules, 'House Rules' %>
     <div class="form-text">Any house rule that the guest needs to follow?</div>
+  </div>
+
+  <div class="mb-4">
+    <%= f.input :images, as: :file, input_html: { multiple: true }, label: "Property's Images" %>
+    <div class="form-text">Show accurate representation of your property</div>
   </div>
 
   <br>

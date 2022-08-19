@@ -16,14 +16,14 @@
 
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <% @listing.images.each_with_index do |photo, i| %>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>" class="<%= "active" if i == 0 %>" aria-current="<%= "true" if i == 0 %>" aria-label="Slide <%= i + 1 %>"></button>
+      <% end %>
     </div>
     <div class="carousel-inner">
-      <% @listing.images.each.with_index do |photo, i| %>
+      <% @listing.images.each_with_index do |image, i| %>
         <div class="carousel-item <%= "active" if i == 0 %>">
-          <%= cl_image_tag @listing.images[i].key, height: "auto", width: "100%", class: "d-block img-box-large" %>
+          <%= cl_image_tag image.key, height: "auto", width: "100%", class: "d-block img-box-large" %>
         </div>
       <% end %>
 
@@ -102,12 +102,12 @@
         </div>
 
         <div class="d-flex">
-          <i class="fa-solid fa-star"></i>
-          <p class="mx-1"><strong>4.63</strong> (82 reviews)</p>
+          <i class="fa-solid fa-star"<%= "hidden" if @listing.bookings.empty? %>>></i>
+          <p class="mx-1"<%= "hidden" if @listing.bookings.empty? %>><strong>4.63</strong> (82 reviews)</p>
         </div>
 
         <form>
-          <div class="row">
+          <div class="row mb-4">
             <div class="col">
               <label for="formGroupExampleInput">Checkin</label>
               <input id="startDate" class="form-control" data-listing-target="startDate" type="date" value="<%= Date.today.strftime("%Y-%m-%d") %>" data-action="change->listing#startDateChange" min="<%= Date.today %>"/>
@@ -119,16 +119,17 @@
             </div>
           </div>
 
-          <label for="formGroupExampleInput">Guests</label>
-          <br>
-          <select class="form-select" id="inlineFormCustomSelectPref" data-listing-target="guestCount">
-            <option selected>1</option>
-            <% (@listing.guest_count + 1).times do |i| %>
-              <% next if i < 2 %>
-              <option value="<%= i %>"><%= i %></option>
-            <% end %>
-          </select>
-
+          <div class="mb-4">
+            <label for="formGroupExampleInput">Guests</label>
+            <br>
+            <select class="form-select" id="inlineFormCustomSelectPref" data-listing-target="guestCount">
+              <option selected>1</option>
+              <% (@listing.guest_count + 1).times do |i| %>
+                <% next if i < 2 %>
+                <option value="<%= i %>"><%= i %></option>
+              <% end %>
+            </select>
+          </div>
           <h6 class="my-4 fw-custom">Payment amount</h6>
           <div class="d-flex justify-content-between">
             <p>$<%= @listing.price_per_night.to_i %> x

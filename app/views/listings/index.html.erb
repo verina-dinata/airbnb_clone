@@ -17,9 +17,10 @@
         <div class="card border-0">
           <%= link_to listing_path(listing), class: "link" do %>
             <div>
-              <% i = [0, 1, 2].sample %>
-              <%= cl_image_tag listing.images[i].key, class:"card-img-top img-box" %>
-              <%# <img class="card-img-top img-box" src="" alt="Card image cap"> %>
+              <% unless listing.images.empty? %>
+                <% i = (0..(listing.images.size - 1)).to_a.sample %>
+                <%= cl_image_tag listing.images[i].key, class:"card-img-top img-box" %>
+              <% end %>
             </div>
           <% end %>
           <div class="card-body">
