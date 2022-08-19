@@ -1,23 +1,16 @@
-<%# <div class="col pt-1" data-controller="booking">
-  <button class="btn btn-primary btn-lg"
-          data-action="click-booking#disable"
-          data-booking-target="button">>
-    Click me!
-  </button>
-  <a href="#" class="d-none ms-2" data-disable-button-target="link">Reset</a>
-</div> %>
-
 <div>
   <div class="jumbotron" style="height: 100vh">
     <div class="row">
-      <div class='col-6 col-lg-4 p-5'>
+      <div class='col-lg-5 col-md-6 col-sm-6  p-5'>
         <div>
           <h3 class="my-3">
           <% if @booking.cancelled_by_guest? %>
             Booking has been cancelled by you
           <% elsif @booking.cancelled_by_host? %>
-            Booking cancelled by host :(
-          <% elsif @booking.end_date < Date.today %>
+            Booking has been cancelled by host
+          <% elsif @booking.pending_host_confirmation? %>
+            Pending host confirmation
+          <% elsif @booking.end_date < Date.today && @booking.accepted_by_host? %>
             Your stay at <%= @booking.listing.host.first_name %>'s place
           <% else %>
             Your upcoming stay with <%= @booking.listing.host.first_name %>!
@@ -29,15 +22,15 @@
               <%= image_tag("logo.png", class: "avatar-large") %>
             </div>
 
-            <div class="ml-custom flex-grow-1">
-              <h5 class="my-0"><%= @booking.listing.host.first_name %></h5>
-              <p class="my-0"><%= @booking.listing.country%></p>
+            <div class="flex-grow-1">
+              <h5 class="my-0 mx-2"><%= @booking.listing.host.first_name %></h5>
+              <p class="my-0 mx-2"><%= @booking.listing.country%></p>
             </div>
             <div data-controller="booking">
               <% if @booking.accepted_by_host? && @booking.end_date < Date.today %>
-                <%= link_to "Rate this trip", '#', class: "booking-btn ml-custom cancel flex-grow-3"%>
+                <%= link_to "Rate this trip", '#', class: "hollow-btn flex-grow-3"%>
               <% elsif @booking.pending_host_confirmation? %>
-                <%= link_to "Cancel this trip", cancel_booking_path(@booking), onclick: "return confirm('Are you sure?')", class: "booking-btn ml-custom cancel flex-grow-3", "data-action" => "click->booking#cancelBooking"%>
+                <%= link_to "Cancel this trip", cancel_booking_path(@booking), onclick: "return confirm('Are you sure?')", class: "hollow-btn flex-grow-3", "data-action" => "click->booking#cancelBooking"%>
               <% end %>
             </div>
           </div>
@@ -46,6 +39,9 @@
           <%= image_tag 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80', width: "100%" %>
         </div>
         <h5 class="my-4 fw-custom"><%= @booking.listing.title %></h5>
+        <% if @booking.accepted_by_host? %>
+          <p><%= @booking.listing.address %></p>
+        <% end %>
         <div class="d-flex justify-content-between">
           <p><%= @booking.start_date.strftime("%A") %></p>
           <p><%= @booking.end_date.strftime("%A") %></p>
@@ -87,10 +83,10 @@
         </div>
         <% disabled = @booking.cancelled_by_host? || @booking.cancelled_by_guest? || Date.today > @booking.end_date %>
         <div class="text-center">
-          <%= button_to "Send #{@booking.listing.host.first_name} a message", '#', disabled: disabled, class: "booking-btn chat"%>
+          <%= button_to "Send #{@booking.listing.host.first_name} a message", '#', disabled: disabled, class: "btn submit-btn"%>
         </div>
       </div>
-      <div class='col-6 col-lg-8'>
+      <div class='col-lg-7 col-md-6 col-sm-6'>
         <div style="width: 100%; height: 100%;"
           data-controller="map"
           data-map-markers-value="<%= @markers.to_json %>"

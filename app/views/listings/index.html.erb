@@ -1,3 +1,7 @@
+
+
+<br>
+
 <div class="container">
   <div>
     <a class="btn btn-flat" href="#">Islands</a>
@@ -5,6 +9,7 @@
     <a class="btn btn-flat" href="#">Tropical</a>
     <a class="btn btn-flat" href="#">Luxury</a>
     <a class="btn btn-flat" href="#">Castles</a>
+
 
 
     <a class="btn btn-gradient" href="#">filters</a>
@@ -16,6 +21,24 @@
         <%= link_to listing.title, listing_path(listing), class: "link" %>
         <p class="mb-0"><%= listing.country %></p>
         <p>$<%= listing.price_per_night%> SGD night</p>
+
+  </div>
+
+  <br>
+
+<div class="row">
+  <div class="cards">
+    <% @listings.each do |listing| %>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 20rem;">
+          <img src="https://www.savoirflair.com/wp-content/uploads/2017/11/Indonesia-AirBnB-1024x683.jpg" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body card-font">
+          <%= link_to listing.title, listing_path(listing), class: "link" %>
+          <p class="mb-0"><%= listing.country %></p>
+          <p>$<%= listing.price_per_night%> SGD night</p>
+        </div>
+
       </div>
     <% end %>
   </div>
@@ -31,7 +54,12 @@
   </div>
 
   <div class="footer-copyright">
+
     This footer is made with <i class="fas fa-heart"></i> at Le Wagon
+  </div>
+
+
+    Airbnb <i class="fas fa-heart"></i> Clone
   </div>
 
 </div>

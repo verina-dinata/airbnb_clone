@@ -12,8 +12,20 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="date" data-booking-target="startDate" value="<%= @booking.start_date%>" min="<%= Date.today %>" id="new_start_date">
-        <input type="date" data-booking-target="endDate" value="<%= @booking.end_date%>" min="<%= Date.today %>" id="new_end_date">
+
+        <form>
+          <div class="row">
+            <div class="col">
+              <label for="formGroupExampleInput">Checkin</label>
+              <input id="startDate" class="form-control" data-booking-target="startDate" type="date" value="<%= @booking.start_date%>" min="<%= Date.today %>" data-action="change->booking#startDateChange"/>
+            </div>
+
+            <div class="col">
+              <label for="formGroupExampleInput">Checkout</label>
+              <input id="endDate" class="form-control" data-booking-target="endDate" type="date" value="<%= @booking.end_date%>" min="<%= Date.today + 1.day %>" />
+            </div>
+          </div>
+        </form>
         <br>
         <span class="text-danger" data-booking-target="dateError"></span>
       </div>

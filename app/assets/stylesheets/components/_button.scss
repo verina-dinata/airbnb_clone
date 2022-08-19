@@ -19,10 +19,20 @@
   border-radius: 4px;
   background: $gray;
   transition: background 0.3s ease;
+
 }
 
 .btn-flat:hover {
   background: #4D04C4;
+
+  font-weight: bolder;
+  font-family: ("Nunito", "Helvetica", "sans-serif");
+  font-size: 20px;
+}
+
+.btn-flat:hover {
+  background:#cdcdce;
+
   color: white;
 }
 
@@ -38,44 +48,97 @@
 }
 
 .btn-gradient:hover {
+
   background: linear-gradient(#147EFF, #0F67DA);
   color: white;
 }
+
+  background: linear-gradient rgb(255, 49, 87)
+}
+
+
 .booking-btn {
   border: 1px solid rgb(255, 49, 87);
   color: white;
+  border-radius: 5px;
+}
+
+.submit-btn {
+  width: 100%;
+  display: block;
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(255, 49, 87) !important;
+  text-decoration: none;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: white !important;
+    color: rgb(255, 49, 87) !important;
+    border: 1px solid rgb(255, 49, 87) !important;
+  }
+
+  &:disabled {
+    background-color: rgb(125, 125, 125) !important;
+    color: rgb(255, 255, 255) !important;
+    border: 1px solid rgb(125, 125, 125) !important;
+  }
+}
+
+.cancel-btn {
+  width: 100%;
+  display: block;
+  color: white;
+  background-color: rgb(125, 125, 125);
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid rgb(125, 125, 125);
+  padding: 6px;
+
+  &:hover {
+    background-color: white;
+    color: rgb(125, 125, 125);
+    border: 1px solid rgb(125, 125, 125);
+  }
+}
+
+.hollow-btn {
+  font-size: 12px;
+  color: rgb(255, 49, 87);
+  white-space: nowrap;
+
+
+
+  border: 1px solid rgb(255, 49, 87) !important;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: white !important;
+    color: rgb(125, 125, 125) !important;
+    border: 1px solid rgb(125, 125, 125) !important;
+  }
+}
+
+.color-txt {
+  color: rgb(255, 49, 87);
+  background-color: white;
+  &:hover {
+    color: rgb(125, 125, 125) ;
+  }
+  border: 1px solid white;
+}
+
+.listing-button {
+  border: 1px solid grey;
+  color: black;
   border-radius: 5px;
   text-decoration: none;
   padding: 8px 16px;
 
   &:hover {
-    color: black;
+    color: grey;
     border: 1px solid black;
   }
-}
-
-.chat {
-  display: block;
-  background-color: rgb(255, 49, 87);
-  width: 100%;
-  margin: 20px 0;
-  padding: 8px 20px;
-  &:hover {
-    background-color: white;
-    color: rgb(255, 49, 87);
-    border: 1px solid rgb(255, 49, 87);
-  }
-
-  &:disabled {
-    background-color: rgb(125, 125, 125);
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(125, 125, 125);
-  }
-}
-
-.cancel {
-  font-size: 12px;
-  color: rgb(255, 49, 87);
-  white-space: nowrap;
 
 }

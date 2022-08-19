@@ -44,7 +44,16 @@ export default class extends Controller {
         console.log(data)
         location.reload()
       })
-
   }
 
+  startDateChange() {
+    let minEndDate = new Date(this.startDateTarget.value)
+    minEndDate.setDate(minEndDate.getDate() + 1)
+    this.endDateTarget.min = minEndDate.toISOString().split('T')[0]
+
+    const endDate = new Date(this.endDateTarget.value)
+    if (endDate < minEndDate) {
+      this.endDateTarget.value = minEndDate.toISOString().split('T')[0]
+    }
+  }
 }

@@ -1,0 +1,69 @@
+<div class="container">
+  <div data-controller="my_listings">
+    <div class="d-flex justify-content-between">
+      <h1 class="my-3">Your listings' bookings</h1>
+      <div class="py-4">
+        <%= link_to "Create a new listing", new_listing_path, class: "hollow-btn" %>
+      </div>
+    </div>
+    <h5 class="mb-3">Pending confirmation</h5>
+    <table class="table mb-5">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Listing Name</th>
+        <th scope="col">Check-in</th>
+        <th scope="col">Checkout</th>
+        <th scope="col">Guest Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pending_bookings.each_with_index do |booking, i|  %>
+        <tr>
+          <th scope="row"><%= i + 1 %></th>
+          <td><%= booking.listing.title %></td>
+          <td><%= booking.start_date.strftime("%d %h %Y") %></td>
+          <td><%= booking.end_date.strftime("%d %h %Y") %></td>
+          <td><%= booking.guest.first_name %></td>
+          <td scope="col" class="d-flex">
+            <button data-action="click->my_listings#updateBooking" href="<%= host_accept_booking_path(booking) %>" onclick="return confirm('Are you sure?')" class="color-txt">Accept</button>
+            <button data-action="click->my_listings#updateBooking" href="<%= host_cancel_booking_path(booking) %>" onclick="return confirm('Are you sure?')" class="color-txt">Decline</button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+
+    <h5 class="mb-3">Upcoming bookings</h5>
+    <%= render "booking_table", bookings: @upcoming_bookings %>
+
+    <h5 class="mb-3">Past bookings</h5>
+    <%= render "booking_table", bookings: @past_bookings %>
+  </div>
+
+
+
+  <div>
+    <h1>Your listings</h1>
+    <div class="row">
+      <% @listings.each do |listing| %>
+        <div class="card mx-2 my-3 col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
+          <%= link_to listing_path(listing), class: "link" do %>
+            <img class="card-img-top" src="https://media.architecturaldigest.com/photos/571e97ce818277135ff91620/master/w_2626,h_1821,c_limit/modernist-decor-inspiration-07.jpg" alt="Card image cap">
+          <% end %>
+          <div class="card-body">
+            <div style="height: 4em">
+              <h6 class="card-title fw-bold mb-3"><%= listing.title %></h6>
+            </div>
+            <div class="d-flex justify-content-start">
+              <%= link_to "Edit", edit_listing_path(listing), class: "hollow-btn py-0 px-2" %>
+              <%= link_to "Delete", listing_path(listing), class: "hollow-btn py-0 px-2 mx-2" %>
+
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

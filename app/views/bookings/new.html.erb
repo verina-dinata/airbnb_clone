@@ -1,35 +1,40 @@
 <div class="row mx-5 my-3">
-  <div class="col-lg-6 col-sm-12 px-5">
+  <div class="col-lg-6 col-md-6 col-sm-12 px-5">
     <div class="">
       <div class="d-flex">
         <div class="m-2 back_link">
-          <%= link_to "#", class: "link" do %>
+          <%= link_to listing_path(@listing), class: "link" do %>
             <i class="fa-solid fa-chevron-left"></i>
           <% end %>
         </div>
         <h1><strong>Request to book</strong></h1>
+      </div>
+      <div class="d-xs-block d-sm-block d-md-none d-lg-none d-xl-none">
+        <%= render "summary_card" %>
       </div>
       <h4 class="my-4">Your trip</h4>
       <h6 class="my-3"><strong>Dates</strong></h6>
       <div class="d-flex justify-content-between">
         <p><%= @booking.start_date.strftime("%d %h %Y") %> - <%= @booking.end_date.strftime("%d %h %Y") %></p>
         <div>
-          <button type="button" class="booking-btn ml-custom cancel flex-grow-3" data-bs-toggle="modal" data-bs-target="#datepicker">
+          <button type="button" class="hollow-btn flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#datepicker">
             Edit
           </button>
 
           <%= render "datepicker_modal" %>
-
-
-
-
         </div>
       </div>
       <h6 class="my-3"><strong>Guests</strong></h6>
       <div class="d-flex justify-content-between">
-        <p><%= @guest_count %> guests</p>
+        <p><%= @guest_count %>
+          <% if @booking.guest_count == 1 %>
+            guest
+          <% else %>
+            guests
+          <% end %>
+        </p>
         <div>
-          <button type="button" class="booking-btn ml-custom cancel flex-grow-3" data-bs-toggle="modal" data-bs-target="#guest">
+          <button type="button" class="hollow-btn flex-grow-3 bg-white px-3 py-1" data-bs-toggle="modal" data-bs-target="#guest">
             Edit
           </button>
 
@@ -41,56 +46,28 @@
       <h6>Message the host</h6>
       <p class="small">Let the host know why you're travelling and when you'll check in</p>
     </div>
-    <div class="my-3 d-flex align-items-center">
+    <div class="my-3 d-flex align-items-center my-4">
       <div>
         <%= image_tag("logo.png", class: "avatar-large") %>
       </div>
 
-      <div class="ml-custom flex-grow-1">
+      <div class="flex-grow-1 mx-2">
         <h5 class="my-0"><%= @booking.listing.host.first_name %></h5>
         <p class="my-0"><%=  @booking.listing.country%></p>
       </div>
     </div>
-    <div class="form-group textarea">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
 
-    <div class="text-center">
-      <%= link_to "Request to book", "#", class: "booking-btn chat"%>
-    </div>
+    <%= simple_form_for (@booking) do |f| %>
+      <%= f.input :start_date, as: :hidden %>
+      <%= f.input :end_date, as: :hidden %>
+      <%= f.input :guest_count, as: :hidden %>
+      <%= f.input :additional_requests, placeholder: "Your additional requests", input_html: { rows: "3" },  label: false %>
+
+      <%= f.input :listing_id, :input_html => { value: @booking.listing.id }, as: :hidden %>
+      <%= f.submit 'Request to book', class: "btn submit-btn" %>
+    <% end %>
   </div>
-  <div class='col-lg-6 col-sm-12 p-3 d-flex justify-content-center'>
-    <div class="col-lg-6 col-sm-12 summary-card">
-      <div>
-        <%= image_tag 'https://cdn.decoist.com/wp-content/uploads/2017/03/Modern-apartment-units-inside-heritage-building-Down-Under.jpg', width: "100%", class: "summary-card-picture" %>
-      </div>
-      <div class="mx-5">
-        <h5 class="my-4 fw-custom"><%= @booking.listing.title %></h5>
-        <div class="d-flex">
-          <i class="fa-solid fa-star"></i>
-          <p class="mx-1"><strong>4.63</strong> (82 reviews)</p>
-        </div>
-        <hr>
-        <h6 class="my-4 fw-custom">Payment amount</h6>
-        <% total_amount = @booking.listing.price_per_night.to_i * @booking.night_count %>
-        <div class="d-flex justify-content-between">
-          <p>$<%= @booking.listing.price_per_night.to_i %> x <%= @booking.night_count %> nights</p>
-          <p>$<%= total_amount %></p>
-        </div>
-        <div class="d-flex justify-content-between">
-          <p>Cleaning Fees</p>
-          <p>$<%= @booking.listing.cleaning_fee %></p>
-        </div>
-        <div class="d-flex justify-content-between">
-          <p>Service Fees</p>
-          <p>$<%= @booking.listing.service_fee %></p>
-        </div>
-        <hr>
-        <div class="d-flex justify-content-between mb-3">
-          <p class="fw-custom">Total</p>
-          <p>$<%= total_amount + @booking.listing.cleaning_fee + @booking.listing.service_fee %></p>
-        </div>
-      </div>
-    </div>
+  <div class='col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-center d-none d-md-block'>
+    <%= render "summary_card" %>
   </div>
 </div>

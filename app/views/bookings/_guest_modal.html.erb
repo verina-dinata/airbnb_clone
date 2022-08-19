@@ -8,7 +8,17 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="number" data-booking-target="guest" value="<%= @booking.guest_count%>" max="<%= @booking.listing.guest_count %>" min="1">
+        <form>
+          <label for="formGroupExampleInput">Guests</label>
+          <br>
+          <select class="form-select" id="inlineFormCustomSelectPref" data-booking-target="guest">
+            <option selected><%= @booking.guest_count%></option>
+            <% (@listing.guest_count + 1).times do |i| %>
+              <% next if i < 1 %>
+              <option value=" <%= i %>"><%= i %></option>
+            <% end %>
+          </select>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

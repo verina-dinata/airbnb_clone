@@ -1,48 +1,118 @@
-<%= simple_form_for(@listing) do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= simple_form_for(listing) do |f| %>
+  <%= f.error_notification %>
 
-    <div class="form-inputs">
-      <%= f.input :title %>
-    </div>
+  <div class="form-floating mb-3">
+    <%= f.input_field :title, class: 'form-control', placeholder: "Enter title" %>
+    <%= f.label :title, 'Title' %>
+    <%= f.full_error :title %>
+    <div class="form-text">Insert a title that will grab the guest's attention! Your title should be between 6 and 50 characters</div>
+  </div>
 
-    <div class="form-inputs">
-      <%= f.input :description %>
-    </div>
+  <br>
+  <div class="form-floating mb-3">
+    <%= f.input_field :address, class: 'form-control', placeholder: "Enter title" %>
+    <%= f.label :address, 'Property Address' %>
+    <%= f.full_error :address %>
+    <div class="form-text">Include your unit and postal code</div>
+  </div>
 
-    <div class="form-inputs">
-      <%= f.input :address %>
-    </div>
+  <br>
+  <div class="form-floating mb-3">
+    <%= f.input_field :price_per_night, class: 'form-control', placeholder: "Enter title" %>
+    <%= f.label :price_per_night, 'Price per Night' %>
+    <%= f.full_error :price_per_night %>
+    <div class="form-text">Provide a competitive price for your property</div>
+  </div>
 
-    <div class="form-inputs">
-      <%= f.input :country %>
-    </div>
+  <br>
+  <div class="form-floating mb-3">
+    <%= f.input_field :service_fee, class: 'form-control', placeholder: "Enter title" %>
+    <%= f.label :service_fee, 'Service fee' %>
+    <%= f.full_error :service_fee %>
+    <div class="form-text">This helps us run our platform and offer services like 24/7 support on your trip.</div>
+  </div>
 
-    <div class="form-inputs">
-      <%= f.input :price_per_night %>
-    </div>
+  <br>
+  <div class="form-floating mb-3">
+    <%= f.input_field :cleaning_fee, class: 'form-control', placeholder: "Enter title" %>
+    <%= f.label :cleaning_fee, 'Cleaning fee' %>
+    <%= f.full_error :cleaning_fee %>
+    <div class="form-text">One-time fee charged by host to cover the cost of cleaning their space.</div>
+  </div>
 
-    <div class="form-inputs">
-      <%= f.input :bedroom_count %>
-    </div>
+  <br>
+  <div class="form-floating mb-4">
+    <% valid_class = 'is-valid' if f.object.country.present? %>
+    <%= f.country_select :country, { priority_countries: ["SG", "USA"] }, { class: "form-select #{valid_class}" }, prompt: 'Select Country' %>
+    <%= f.label :country, 'Country' %>
+  </div>
 
-    <div class="form-inputs">
-      <%= f.input :bathroom_count %>
-    </div>
+  <% option = [] %>
 
-    <div class="form-inputs">
-      <%= f.input :bed_count %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :house_rules %>
-    </div>
-
-    <div class="form-inputs">
-      <%= f.input :guest_count %>
-    </div>
-
-    <div class="form-actions btn btn-danger">
-      <%= f.button :submit %>
-    </div>
+  <% 15.times do |i| %>
+    <% option << [i + 1, i + 1 ]%>
   <% end %>
+
+  <br>
+  <div class="row row-cols-md-auto row-cols-lg-auto g-3 align-items-center needs-validation">
+    <div class="form-floating mb-4 col-lg-3 col-md-3 col-sm-6">
+      <%= f.input_field :guest_count, as: :select,
+      collection:  option,
+      selected: 1,
+      class: "form-select",
+      placeholder:"Enter number of guests"  %>
+      <%= f.label :guest_count, 'Guests' %>
+    </div>
+
+    <div class="form-floating mb-4 col-lg-3 col-md-3 col-sm-6">
+      <%= f.input_field :bedroom_count, as: :select,
+      collection:  option,
+      selected: 1,
+      class: "form-select",
+      placeholder:"Enter number of bedrooms" %>
+      <%= f.label :bedroom_count, 'Bedrooms' %>
+    </div>
+
+    <div class="form-floating mb-4 col-lg-3 col-md-3 col-sm-6">
+      <%= f.input_field :bed_count, as: :select,
+      collection:  option,
+      selected: 1,
+      class: "form-select",
+      placeholder:"Enter number of beds"%>
+      <%= f.label :bed_count, 'Beds' %>
+    </div>
+
+    <div class="form-floating mb-4 col-lg-3 col-md-3 col-sm-6">
+      <%= f.input_field :bathroom_count, as: :select,
+      collection:  option,
+      selected: 1,
+      class: "form-select",
+      placeholder:"Enter number of bathrooms" %>
+      <%= f.label :bathroom_count, 'Bathrooms' %>
+    </div>
+  </div>
+
+  <br>
+  <div class="form-floating mb-3">
+    <%= f.input_field :description, as: :text, class: 'form-control', style: 'height:8em;', placeholder:"Tell us your property's description"  %>
+    <%= f.label :description, 'Description' %>
+    <div class="form-text">Provide the guest with more information about your propery. Your description should be between 20 and 3500 characters</div>
+  </div>
+
+  <br>
+  <div class="form-floating mb-3">
+    <%= f.input_field :house_rules, as: :text, class: 'form-control', style: 'height:8em;', placeholder:"Tell us your story"  %>
+    <%= f.label :house_rules, 'House Rules' %>
+    <div class="form-text">Any house rule that the guest needs to follow?</div>
+  </div>
+
+  <br>
+  <div class="row mb-5">
+    <div class= "col-lg-6 col-md-6 col-sm-12">
+      <button type="reset" class="cancel-btn">Cancel</button>
+    </div>
+    <div class="form-actions col-lg-6 col-md-6 col-sm-12">
+        <%= f.button :submit, class: "btn submit-btn" %>
+    </div>
+  </div>
+<% end %>
