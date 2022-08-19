@@ -57,7 +57,7 @@ hotels.each do |hotel, detail|
   listing.host = User.all.sample
   file = URI.open("https://cdn.vox-cdn.com/thumbor/qgQrZikp7XSdns41hyhNTXypgDA=/0x0:4560x3300/1200x800/filters:focal(1916x1286:2644x2014)/cdn.vox-cdn.com/uploads/chorus_image/image/60077225/House_Calls_Brooklyn_Zames_Williams_living_room_2_Matthew_Williams.0.jpg")
   listing.images.attach(io: file, filename: "room_interior.jpg", content_type: "image/jpg")
-  file2 = URI.open("https://imageio.forbes.com/specials-images/imageserve/5ffdfc89a676bc1fa37f33cb/Black-and-white-bathroom-with-deep-tub-and-large-shower-/960x0.jpg?format=jpg&width=960")
+  file2 = URI.open("https://www.build-review.com/wp-content/uploads/2021/02/modern-bathroom-2.jpg")
   listing.images.attach(io: file2, filename: "bathroom.jpg", content_type: "image/jpg")
   file3 = URI.open("https://www.thespruce.com/thmb/9zdyLzPobCbaJrCfue4JR-xe6Ps=/2075x1167/smart/filters:no_upscale()/living-room-dos-and-donts-2213467-hero-da82a4643bc84d669a0a34f64e60beb1.jpg")
   listing.images.attach(io: file3, filename: "living_room.jpg", content_type: "image/jpg")
