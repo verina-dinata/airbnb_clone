@@ -68,7 +68,7 @@
 }
 
 .trip-card {
-  width: 270px; // change to make it responsive
+  width: 72px; // change to make it responsive
   height: 72px;
   margin: 10px 10px;
   justify-content: flex-start;
@@ -81,12 +81,13 @@
 }
 
 .trip-card-image {
-  // height: 60px;
+  height: 72px;
   // width: 60px;
   width: 72px;
-  border-radius: 20px;
+  border-radius: 8px;
   background-position: center;
   background-size: cover;
+  // object-fit: cover;
 
 }
 
@@ -154,4 +155,10 @@
   object-fit: cover;
   width: 230px;
   height: 230px;
+}
+
+.img-box {
+  object-fit: cover;
+  width: 72px;
+  height: 72px;
 }
