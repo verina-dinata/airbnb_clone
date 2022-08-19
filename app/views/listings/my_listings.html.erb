@@ -71,7 +71,9 @@
             </div>
             <div class="d-flex justify-content-start">
               <%= link_to "Edit", edit_listing_path(listing), class: "hollow-btn py-0 px-2" %>
-              <%= link_to "Delete", my_listings_path(listing), class: "hollow-btn py-0 px-2 mx-2", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <% if listing.bookings.empty? %>
+                <%= link_to "Delete", listing_path(listing), class: "hollow-btn py-0 px-2 mx-2", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <% end %>
             </div>
           </div>
         </div>
