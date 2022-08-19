@@ -6,51 +6,64 @@
         <%= link_to "Create a new listing", new_listing_path, class: "hollow-btn" %>
       </div>
     </div>
-    <h5 class="mb-3">Pending confirmation</h5>
-    <table class="table mb-5">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Listing Name</th>
-        <th scope="col">Check-in</th>
-        <th scope="col">Checkout</th>
-        <th scope="col">Guest Name</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @pending_bookings.each_with_index do |booking, i|  %>
-        <tr>
-          <th scope="row"><%= i + 1 %></th>
-          <td><%= booking.listing.title %></td>
-          <td><%= booking.start_date.strftime("%d %h %Y") %></td>
-          <td><%= booking.end_date.strftime("%d %h %Y") %></td>
-          <td><%= booking.guest.first_name %></td>
-          <td scope="col" class="d-flex">
-            <button data-action="click->my_listings#updateBooking" href="<%= host_accept_booking_path(booking) %>" onclick="return confirm('Are you sure?')" class="color-txt">Accept</button>
-            <button data-action="click->my_listings#updateBooking" href="<%= host_cancel_booking_path(booking) %>" onclick="return confirm('Are you sure?')" class="color-txt">Decline</button>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-    </table>
+    <div class="<%= "d-none" if @pending_bookings.empty? %>">
+      <h5 class="mb-3">Pending confirmation</h5>
+      <table class="table mb-5">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Listing Name</th>
+            <th scope="col">Check-in</th>
+            <th scope="col">Checkout</th>
+            <th scope="col">Guest Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pending_bookings.each_with_index do |booking, i|  %>
+            <tr>
+              <th scope="row"><%= i + 1 %></th>
+              <td><%= booking.listing.title %></td>
+              <td><%= booking.start_date.strftime("%d %h %Y") %></td>
+              <td><%= booking.end_date.strftime("%d %h %Y") %></td>
+              <td><%= booking.guest.first_name %></td>
+              <td scope="col" class="d-flex">
+                <button data-action="click->my_listings#updateBooking" href="<%= host_accept_booking_path(booking) %>" onclick="return confirm('Are you sure?')" class="color-txt">Accept</button>
+                <button data-action="click->my_listings#updateBooking" href="<%= host_cancel_booking_path(booking) %>" onclick="return confirm('Are you sure?')" class="color-txt">Decline</button>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-    <h5 class="mb-3">Upcoming bookings</h5>
-    <%= render "booking_table", bookings: @upcoming_bookings %>
+    <div class="<%= "d-none" if @upcoming_bookings.empty? %>">
+      <h5 class="mb-3">Upcoming bookings</h5>
+      <%= render "booking_table", bookings: @upcoming_bookings %>
+    </div>
 
-    <h5 class="mb-3">Past bookings</h5>
-    <%= render "booking_table", bookings: @past_bookings %>
+    <div class="<%= "d-none" if @past_bookings.empty? %>">
+      <h5 class="mb-3">Past bookings</h5>
+      <%= render "booking_table", bookings: @past_bookings %>
+    </div>
   </div>
-
-
 
   <div>
     <h1>Your listings</h1>
     <div class="row">
       <% @listings.each do |listing| %>
-        <div class="card mx-2 my-3 col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
+        <% picture = ["http://iconinterior.com.sg/wp-content/uploads/2019/05/Icon_27831_Final.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBIs77epe58QsN5JxxiNA0HdbjD_3SeS9T6g&usqp=CAU",
+                    "https://www.design4space.com.sg/wp-content/uploads/2022/04/DSC09736-HDR-1536x1024-1.webp",
+                    "https://www.decoraid.com/wp-content/uploads/2021/04/Interior-of-modern-hallway-with-mirror-scaled.jpeg",
+                    "https://www.build-review.com/wp-content/uploads/2020/09/interior-design.jpg",
+                    "https://media.istockphoto.com/photos/elegant-and-vintage-apartment-interior-with-classic-wooden-furniture-picture-id1130536041?k=20&m=1130536041&s=612x612&w=0&h=UB2U4XFqZZhGlym-Ebh3JLboi6ALBhGB_AGdl3lk1g8=",
+                    "https://img.freepik.com/premium-photo/modern-living-room-interior-design_221619-79.jpg?w=2000",
+                    "https://s3-ap-southeast-1.amazonaws.com/atap-main/gallery-full/7c4a8bdd-5a45-44f1-bc0b-666ff60c1db4/modern-apartment-design.jpg",
+                    "https://image.archify.com/blog/l/mjkway45.jpg"].sample %>
+        <div class="card mx-2 my-3 col-lg-4 col-md-6 col-sm-12 border-0" style="width: 18rem;">
           <%= link_to listing_path(listing), class: "link" do %>
-            <img class="card-img-top" src="https://media.architecturaldigest.com/photos/571e97ce818277135ff91620/master/w_2626,h_1821,c_limit/modernist-decor-inspiration-07.jpg" alt="Card image cap">
+            <img class="card-img-top img-box" src=<%= picture %> alt="Card image cap">
           <% end %>
           <div class="card-body">
             <div style="height: 4em">
@@ -58,8 +71,7 @@
             </div>
             <div class="d-flex justify-content-start">
               <%= link_to "Edit", edit_listing_path(listing), class: "hollow-btn py-0 px-2" %>
-              <%= link_to "Delete", listing_path(listing), class: "hollow-btn py-0 px-2 mx-2" %>
-
+              <%= link_to "Delete", my_listings_path(listing), class: "hollow-btn py-0 px-2 mx-2", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
             </div>
           </div>
         </div>

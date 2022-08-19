@@ -1,3 +1,12 @@
+.body{
+  min-height: 180vh;
+  display: flex;
+  flex-direction: column;
+}
+.footer{
+  margin-top: auto;
+}
+
 .footer {
   background: #F4F4F4;
   display: flex;
